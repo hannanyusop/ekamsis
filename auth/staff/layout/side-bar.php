@@ -12,23 +12,28 @@
         </div>
         <ul class="sidebar-menu">
 
-            <li><a class="sidebar-header " href="blade-components.html"><i data-feather="menu"></i><span>Blade Components</span></a></li>
+            <li><a class="sidebar-header " href="index.php"><i data-feather="menu"></i><span>Dashboard</span></a></li>
 
             <li class="">
-                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Dashboard</span>
-                    <span class="badge badge-pill badge-primary">6</span><i class="fa fa-angle-right pull-right"></i>
+                <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Data Management</span>
+                    <i class="fa fa-angle-right pull-right"></i>
                 </a>
                 <ul class="sidebar-submenu">
-                    <li><a href="dashboard/default.html" class=""><i class="fa fa-circle"></i>Default</a></li>
-                    <li><a href="dashboard/e-commerce.html" class=""><i class="fa fa-circle"></i>E-commerce</a></li>
-                    <li><a href="dashboard/university.html" class=""><i class="fa fa-circle"></i>University</a></li>
-                    <li><a href="dashboard/crypto.html" class=""><i class="fa fa-circle"></i>Crypto</a></li>
-                    <li><a href="dashboard/server.html" class=""><i class="fa fa-circle"></i>Server</a></li>
-                    <li><a href="dashboard/project.html" class=""><i class="fa fa-circle"></i>Project Dashboard</a></li>
+                    <li><a href="data-blocks.php" class=""><i class="fa fa-circle"></i>Block</a></li>
+                    <li><a href="data-inventory.php" class=""><i class="fa fa-circle"></i>Inventory</a></li>
+                    <li><a href="data-session.php" class=""><i class="fa fa-circle"></i>Session</a></li>
                 </ul>
             </li>
 
-            <li><a class="sidebar-header" href="check-session.php" class="" target="_blank"><i data-feather="book"></i><span> Check</span></a></li>
+            <li class="">
+                <a class="sidebar-header" href="#"><i data-feather="users"></i><span>User Management</span>
+                    <i class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li><a href="management-student.php" class=""><i class="fa fa-circle"></i>Student</a></li>
+                    <li><a href="management-staff.php" class=""><i class="fa fa-circle"></i>Staff</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>

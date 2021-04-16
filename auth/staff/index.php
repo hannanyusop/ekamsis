@@ -24,7 +24,7 @@
                             <div class="page-header-left">
                                 <h3>Sample Page</h3>
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="http://laravel.pixelstrap.com/endless"><i data-feather="home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item active">Sample Page</li>
                                 </ol>
                             </div>
