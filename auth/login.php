@@ -15,18 +15,14 @@
                         <h4>LOGIN</h4>
                         <h6>Enter your Username and Password </h6>
                       </div>
-                      <form class="theme-form" action="student/index.php">
+                      <form class="theme-form" method="post" action="verify.php">
                         <div class="form-group">
-                          <label class="col-form-label pt-0">Your Name</label>
-                          <input class="form-control" type="text">
+                          <label class="col-form-label pt-0" for="email">Email</label>
+                          <input class="form-control" type="email" name="email" id="email">
                         </div>
                         <div class="form-group">
-                          <label class="col-form-label">Password</label>
-                          <input class="form-control" type="password">
-                        </div>
-                        <div class="checkbox p-0">
-                          <input id="checkbox1" type="checkbox">
-                          <label for="checkbox1">Remember me</label>
+                          <label class="col-form-label" for="password">Password</label>
+                          <input class="form-control" type="password" name="password" id="password">
                         </div>
                         <div class="form-group form-row mt-3 mb-0">
                           <button class="btn btn-primary btn-block" type="submit">Login</button>

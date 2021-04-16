@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php include_once('../permission_user.php') ?>
 <?= include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">

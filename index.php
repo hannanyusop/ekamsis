@@ -1,3 +1,3 @@
 <script>
-    window.location='login.php'
+    window.location='auth/login.php'
 </script>

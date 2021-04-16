@@ -1,14 +1,14 @@
 <div class="page-sidebar">
     <div class="main-header-left d-none d-lg-block">
-        <div class="logo-wrapper"><a href="http://laravel.pixelstrap.com/endless"><img src="../../assets/images/endless-logo.png" alt=""></a></div>
+        <div class="logo-wrapper"><a href="http://laravel.pixelstrap.com/endless"><img src="../../../assets/images/endless-logo.png" alt=""></a></div>
     </div>
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
-            <div><img class="img-60 rounded-circle" src="../../assets/images/user/1.jpg" alt="#">
+            <div><img class="img-60 rounded-circle" src="../../../assets/images/user/1.jpg" alt="#">
                 <div class="profile-edit"><a href="edit-profile.html" target="_blank"><i data-feather="edit"></i></a></div>
             </div>
-            <h6 class="mt-3 f-14">ELANA</h6>
-            <p>General Manager.</p>
+            <h6 class="mt-3 f-14"><?=$_SESSION['auth']['fullname'] ?></h6>
+            <p><?=$_SESSION['auth']['role'] ?></p>
         </div>
         <ul class="sidebar-menu">
 
@@ -28,7 +28,7 @@
                 </ul>
             </li>
 
-            <li><a class="sidebar-header" href="maintenance.html" class="" target="_blank"><i data-feather="settings"></i><span> Maintenance</span></a></li>
+            <li><a class="sidebar-header" href="check-session.php" class="" target="_blank"><i data-feather="book"></i><span> Check</span></a></li>
         </ul>
     </div>
 </div>

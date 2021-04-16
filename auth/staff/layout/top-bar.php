@@ -1,7 +1,7 @@
 <div class="page-main-header">
     <div class="main-header-right row">
         <div class="main-header-left d-lg-none">
-            <div class="logo-wrapper"><a href="http://laravel.pixelstrap.com/endless"><img src="../../assets/images/endless-logo.png" alt=""></a></div>
+            <div class="logo-wrapper"><a href="http://laravel.pixelstrap.com/endless"><img src="../../../assets/images/endless-logo.png" alt=""></a></div>
         </div>
         <div class="mobile-sidebar">
             <div class="media-body text-right switch-sm">
@@ -43,7 +43,7 @@
                 </li>
                 <li><a href="#"><i class="right_side_toggle" data-feather="message-circle"></i><span class="dot"></span></a></li>
                 <li class="onhover-dropdown">
-                    <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle" src="../../assets/images/dashboard/user.png" alt="header-user">
+                    <div class="media align-items-center"><img class="align-self-center pull-right img-50 rounded-circle" src="../../../assets/images/dashboard/user.png" alt="header-user">
                         <div class="dotted-animation"><span class="animate-circle"></span><span class="main-circle"></span></div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div p-20">
@@ -51,7 +51,7 @@
                         <li><a href="#"><i data-feather="mail"></i>                                    Inbox</a></li>
                         <li><a href="#"><i data-feather="lock"></i>                                    Lock Screen</a></li>
                         <li><a href="#"><i data-feather="settings"></i>                                    Settings</a></li>
-                        <li><a href="../../index.php"><i data-feather="log-out"></i>                                    Logout</a></li>
+                        <li><a href="../logout.php"><i data-feather="log-out"></i>                                    Logout</a></li>
                     </ul>
                 </li>
             </ul>

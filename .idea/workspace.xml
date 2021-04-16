@@ -11,13 +11,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25b3423a-5da3-4efb-9d76-8d433e6f9f1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/auth/logout.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/permission_staff.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/permission_user.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/staff/check-info.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/staff/check-session.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/staff/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/staff/layout/head.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/staff/layout/script.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/staff/layout/side-bar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/staff/layout/top-bar.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/student/check-info.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/student/check-session.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/student/layout/footer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/verify-signup.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/verify.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/._db_config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/db_config.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/helper.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/env.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layout/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/layout/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layout/side-bar.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/layout/side-bar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/layout/top-bar.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/layout/top-bar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/layout/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/layout/head.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/layout/script.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/layout/script.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/layout/head.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layout/script.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/layout/script.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/student/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/layout/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/staff/layout/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/layout/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/student/layout/head.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/layout/script.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/student/layout/script.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/layout/side-bar.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/student/layout/side-bar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/layout/top-bar.php" beforeDir="false" afterPath="$PROJECT_DIR$/auth/student/layout/top-bar.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,15 +65,19 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/auth" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\laragon\www\ekamsis\student\layout" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\ekamsis\auth" />
       <recent name="C:\laragon\www\ekamsis" />
+      <recent name="C:\laragon\www\ekamsis\student" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\ekamsis\auth" />
+      <recent name="C:\laragon\www\ekamsis\student\layout" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -61,7 +89,8 @@
       <option name="presentableId" value="Default" />
       <updated>1618306214929</updated>
       <workItem from="1618306216116" duration="2791000" />
-      <workItem from="1618387888823" duration="377000" />
+      <workItem from="1618387888823" duration="3998000" />
+      <workItem from="1618595188217" duration="3345000" />
     </task>
     <servers />
   </component>
@@ -81,9 +110,13 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1618307533424">
+    <state x="277" y="77" key="SettingsEditor" timestamp="1618597567522">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1618307533424" />
+    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1618597567522" />
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1618597573122">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="431" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1618597573122" />
   </component>
 </project>
