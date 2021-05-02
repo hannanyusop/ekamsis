@@ -24,6 +24,8 @@
     <!-- Feather icon-->
     <link rel="stylesheet" type="text/css" href="../../../../../assets/css/feather-icon.css">
 
+    <link rel="stylesheet" type="text/css" href="../../../../../assets/css/select2.css">
+
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="../../../../assets/css/bootstrap.css">
     <!-- App css-->

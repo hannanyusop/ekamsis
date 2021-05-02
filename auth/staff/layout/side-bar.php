@@ -22,6 +22,7 @@
                     <li><a href="data-block.php" class=""><i class="fa fa-circle"></i>Block</a></li>
                     <li><a href="data-inventory.php" class=""><i class="fa fa-circle"></i>Inventory</a></li>
                     <li><a href="data-session.php" class=""><i class="fa fa-circle"></i>Session</a></li>
+                    <li><a href="data-rent.php" class=""><i class="fa fa-circle"></i>Rent</a></li>
                 </ul>
             </li>
 

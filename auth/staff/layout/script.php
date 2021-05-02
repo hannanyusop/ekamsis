@@ -10,6 +10,9 @@
 <!-- Theme Config -->
 <script src="../../assets/js/config.js"></script>
 
+<script src="../../assets/js/select2/select2.full.min.js"></script>
+<script src="../../assets/js/select2/select2-custom.js"></script>
+
 <script src="../../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
 <script src="../../assets/js/typeahead/handlebars.js"></script>
 <script src="../../assets/js/typeahead/typeahead.bundle.js"></script>
