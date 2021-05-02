@@ -1,7 +1,7 @@
 <?php
 
 include_once 'db_config.php';
-
+//https://app.diagrams.net/#G1f69diPwJGBw-CLK9TP6kVZAKhpVS6CXg
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;

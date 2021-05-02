@@ -12,31 +12,17 @@
         $block = $q_block->fetch_assoc();
 
         if(!$block){
-            echo "<script>alert('Block not exist!');window.location='data-session.php';</script>";
+            echo "<script>alert('Block not exist!');window.location='data-block.php';</script>";
             exit();
         }
 
         $floors = json_decode($block['floor_list']);
 
-        if(isset($_POST['form'])){
+        $q_inventories = $db->query("SELECT * FROM inventories WHERE is_active=1");
 
-            if($_POST['form'] == "add-room"){
+        $r_rooms = $db->query("SELECT * FROM rooms WHERE block_id=$_GET[id]");
 
-                $name = strtoupper($_POST['name']);
-                $q = "INSERT INTO rooms (block_id, floor, is_active, name) VALUES ('$block[id]', '$_POST[floor]', 1, '$name')";
-
-                if (!$db->query($q)) {
-                    echo "<script>alert('Failed to insert new room.');window.location='data-room.php?id='".$_GET['id']."</script>";
-                }else{
-
-                    echo "<script>alert('New session successfully inserted!');window.location='data-room.php?id='".$_GET['id']."</script>";
-                }
-            }
-        }
-
-
-
-        $result = $db->query("SELECT * FROM rooms WHERE block_id=$_GET[id]");
+        $result = $db->query("SELECT * FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE block_id=$_GET[id]");
     }else{
         dd('stop');
     }
@@ -63,7 +49,9 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item"><a href="data-block.php">Room</a></li>
+                                    <li class="breadcrumb-item"><a href="data-block.php">Block</a></li>
+                                    <li class="breadcrumb-item"><?= $block['name'] ?></li>
+                                    <li class="breadcrumb-item">Room</li>
                                 </ol>
                             </div>
                         </div>
@@ -72,6 +60,9 @@
                                 <ul>
                                     <li>
                                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addRoom">Add Room</button>
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addSubRoom">Add Sub Room</button>
                                     </li>
                                 </ul>
                             </div>
@@ -82,7 +73,7 @@
 
             <div class="modal fade" id="addRoom" tabindex="-1" role="dialog" aria-labelledby="addRoom" aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <form method="post">
+                    <form method="post" action="data-room-add.php?id=<?= $_GET['id'] ?>">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="addRoom">Add Room</h5>
@@ -92,7 +83,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="name">Name</label>
+                                            <label class="col-sm-3 col-form-label" for="name">Room Name</label>
                                             <div class="col-sm-9">
                                                 <input type="hidden" name="form" value="add-room" required>
                                                 <input class="form-control text-uppercase" type="text" id="name" name="name">
@@ -121,7 +112,61 @@
                     </form>
                 </div>
             </div>
-            <!-- Scrolling long content-->
+
+            <div class="modal fade" id="addSubRoom" tabindex="-1" role="dialog" aria-labelledby="addSubRoom" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <form method="post" action="data-room-add.php?id=<?= $_GET['id'] ?>">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addSubRoom">Add Sub Room</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="code">Sub Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="hidden" name="form" value="add-sub-room" required>
+                                                <input class="form-control text-uppercase" type="text" id="code" name="code" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="room_id">Room</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="room_id" name="room_id" required>
+                                                    <?php while($room = $r_rooms->fetch_assoc()){ ;?>
+                                                        <option value="<?=$room['id'] ?>"><?= $room['name'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label" for="floor">Inventory</label>
+                                            <div class="col-sm-9">
+                                                <div class="col">
+                                                    <?php while($inventory = $q_inventories->fetch_assoc()){ ;?>
+                                                        <label class="d-block" for="inventory_id_<?= $inventory['id']?>">
+                                                            <input class="checkbox_animated" id="inventory_id_<?= $inventory['id']?>" type="checkbox" value="<?= $inventory['id']?>" name="inventory_id[]"><?= $inventory['name'];?>                                                        </label>
+                                                    <?php } ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="button" data-dismiss="modal">Close</button>
+                                <button class="btn btn-secondary" type="submit">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
 
             <div class="container-fluid">
                 <div class="row">
@@ -142,11 +187,10 @@
                                         <?php while($data = $result->fetch_assoc()){ ;?>
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
-                                                <td><?= strLimit($data['name'], 20); ?></td>
+                                                <td><?= $data['floor']." ".$data['name']." - ".$data['code'] ?></td>
                                                 <td><?= $data['floor']; ?></td>
                                                 <td>
-                                                    <a href="data-room.php<?=$data['id'] ?>" class="btn btn-danger btn-xs">Edit</a>
-                                                    <a href="data-room.php<?=$data['id'] ?>" class="btn btn-danger btn-xs">Manage Room</a>
+                                                    <a href="data-room-sub-view.php?id=<?=$data['id'] ?>" class="btn btn-info btn-xs">View</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
