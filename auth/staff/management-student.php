@@ -4,9 +4,9 @@
 
 <?php include_once('../permission_staff.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM blocks");
+    $result = $db->query("SELECT * FROM users");
 ?>
-<?php include('layout/head.php'); ?>
+<?= include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
 
@@ -28,15 +28,8 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item">Block</li>
+                                    <li class="breadcrumb-item">Student</li>
                                 </ol>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="bookmark pull-right">
-                                <ul>
-                                    <li><a href="data-block-add.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add New Block</a> </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -54,7 +47,9 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Floor</th>
+                                            <th>Matric Number</th>
+                                            <th>Phone Number</th>
+                                            <th>Verified</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -62,10 +57,12 @@
                                         <?php while($data = $result->fetch_assoc()){ ;?>
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
-                                                <td><?= strLimit($data['name'], 20); ?></td>
-                                                <td><?= implode(",", json_decode($data['floor_list'])) ?></td>
+                                                <td><?= strLimit($data['fullname'], 20); ?></td>
+                                                <td><?= $data['matric_number']; ?></td>
+                                                <td><?= $data['phone_number']; ?></td>
+                                                <td><?= (is_null($data['verified_at']))? "<span class='badge badge-dark'>Not Verified</span>" : $data['verified_at']; ?></td>
                                                 <td>
-                                                    <a href="data-room.php?id=<?=$data['id'] ?>" class="btn btn-danger btn-xs">Manage Room</a>
+                                                    <a href="" class="btn btn-info btn-xs" type="button">View</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -89,5 +86,6 @@
 
 </body>
 
-<?php include('layout/script.php'); ?>
+<?= include('layout/script.php'); ?>
+<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
 </html>

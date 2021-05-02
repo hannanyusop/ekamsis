@@ -4,7 +4,26 @@
 
 <?php include_once('../permission_staff.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM blocks");
+    $result = $db->query("SELECT * FROM sessions");
+
+
+    if($_GET['active']){
+
+        $check_q = $db->query("SELECT * FROM sessions WHERE id='$_GET[active]'");
+        $exist = $check_q->fetch_assoc();
+
+        if(!$exist){
+            echo "<script>alert('Session for not exist!');window.location='data-session.php';</script>";
+        }else{
+            $db->query("UPDATE sessions SET is_current=0 WHERE is_current=1");
+
+            if($db->query("UPDATE sessions SET is_current=1 WHERE id='$_GET[active]'")){
+                echo "<script>alert('Session status updated!');window.location='data-session.php';</script>";
+            }
+        }
+
+
+    }
 ?>
 <?php include('layout/head.php'); ?>
 
@@ -28,14 +47,14 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item">Block</li>
+                                    <li class="breadcrumb-item">Session</li>
                                 </ol>
                             </div>
                         </div>
                         <div class="col">
                             <div class="bookmark pull-right">
                                 <ul>
-                                    <li><a href="data-block-add.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add New Block</a> </li>
+                                    <li><a href="data-session-add.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add Session</a> </li>
                                 </ul>
                             </div>
                         </div>
@@ -54,7 +73,7 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
-                                            <th>Floor</th>
+                                            <th>Active Session</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -63,9 +82,11 @@
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
-                                                <td><?= implode(",", json_decode($data['floor_list'])) ?></td>
+                                                <td><?= ($data['is_current'] == 1)? "Yes" : "No" ?></td>
                                                 <td>
-                                                    <a href="data-room.php?id=<?=$data['id'] ?>" class="btn btn-danger btn-xs">Manage Room</a>
+                                                    <?php if($data['is_current'] == 0){ ?>
+                                                        <a href="data-session.php?active=<?=$data['id']?>" class="btn btn-success btn-xs" type="button" onclick="return confirm('Are you sure want to update this session status as current session?')">Set As Current</a>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -89,5 +110,6 @@
 
 </body>
 
-<?php include('layout/script.php'); ?>
+<?= include('layout/script.php'); ?>
+<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
 </html>

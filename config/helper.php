@@ -364,4 +364,8 @@ function strLimit($string, $limit = 20){
     return (strlen($string) > $limit)?substr($string, 0, $limit) . '...' : $string ;
 }
 
+function getYear(){
+    return range(2015, date('Y'));
+}
+
 

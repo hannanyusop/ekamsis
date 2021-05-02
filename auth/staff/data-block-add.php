@@ -8,7 +8,8 @@
 
 
         $floor_list = json_encode(explode(",",$_POST['floor']));
-        $name = strtoupper($_POST[name]);
+        $name = strtoupper($_POST['name']);
+
         $is_active = (isset($_POST['is_active']))? 1 : 0;
         $inventory = "INSERT INTO blocks (name, floor_list) VALUES ('$name', '$floor_list')";
         if (!$db->query($inventory)) {

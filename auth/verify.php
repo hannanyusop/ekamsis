@@ -4,6 +4,8 @@ require_once '../env.php';
 
 if(isset($_POST['email']) && isset($_POST['password'])){
 
+//    $hash_pass = password_hash("secret", PASSWORD_BCRYPT);
+//    dd($hash_pass);
     $email = $_POST['email']; $password = $_POST['password'];
 
     $domain = getEmailDomain($email);
