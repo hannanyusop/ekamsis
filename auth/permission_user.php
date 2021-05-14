@@ -14,4 +14,8 @@
 
     $user_id = $_SESSION['auth']['user_id'];
 
+    $q_session = $db->query("SELECT * FROM sessions where is_current=1");
+
+    $current_session = $q_session->fetch_assoc();
+
 ?>

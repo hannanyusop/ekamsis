@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 <body main-theme-layout="main-theme-layout-1">
 
 <!-- Loader ends-->
@@ -70,5 +70,5 @@
 <!-- Plugin used-->
 </body>
 
-<?= include('layout/script.php'); ?>
+<?php include('layout/script.php'); ?>
 </html>

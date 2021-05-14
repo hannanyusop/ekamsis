@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
   <body main-theme-layout="main-theme-layout-1">
     <div class="page-wrapper">
         <div class="authentication-main">
@@ -43,6 +43,6 @@
         </div>
     </div>
   </body>
-<?= include('layout/script.php') ?>
+<?php include('layout/script.php') ?>
 <!-- Plugin used-->
 </html>

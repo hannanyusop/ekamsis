@@ -22,7 +22,9 @@
 
         $r_rooms = $db->query("SELECT * FROM rooms WHERE block_id=$_GET[id]");
 
-        $result = $db->query("SELECT * FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE block_id=$_GET[id]");
+        $result = $db->query("SELECT 
+rs.id as rsid, floor,name,code
+ FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE block_id=$_GET[id]");
     }else{
         dd('stop');
     }
@@ -61,9 +63,6 @@
                                     <li>
                                         <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addRoom">Add Room</button>
                                     </li>
-                                    <li>
-                                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#addSubRoom">Add Sub Room</button>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -100,46 +99,11 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="button" data-dismiss="modal">Close</button>
-                                <button class="btn btn-secondary" type="submit">Add</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="modal fade" id="addSubRoom" tabindex="-1" role="dialog" aria-labelledby="addSubRoom" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form method="post" action="data-room-add.php?id=<?= $_GET['id'] ?>">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addSubRoom">Add Sub Room</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="code">Sub Name</label>
-                                            <div class="col-sm-9">
-                                                <input type="hidden" name="form" value="add-sub-room" required>
-                                                <input class="form-control text-uppercase" type="text" id="code" name="code" required>
-                                            </div>
-                                        </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="room_id">Room</label>
+                                            <label class="col-sm-3 col-form-label" for="total">Total Sub Room</label>
                                             <div class="col-sm-9">
-                                                <select class="form-control" id="room_id" name="room_id" required>
-                                                    <?php while($room = $r_rooms->fetch_assoc()){ ;?>
-                                                        <option value="<?=$room['id'] ?>"><?= $room['name'] ?></option>
-                                                    <?php } ?>
-                                                </select>
+                                                <input type="number" class="form-control" min="1" max="8" name="total" value="1" required>
                                             </div>
                                         </div>
 
@@ -167,7 +131,6 @@
                 </div>
             </div>
 
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
@@ -186,11 +149,11 @@
                                         <tbody>
                                         <?php while($data = $result->fetch_assoc()){ ;?>
                                             <tr>
-                                                <td><?= $data['id']; ?></td>
+                                                <td><?= $data['rsid']; ?></td>
                                                 <td><?= $data['floor']." ".$data['name']." - ".$data['code'] ?></td>
                                                 <td><?= $data['floor']; ?></td>
                                                 <td>
-                                                    <a href="data-room-sub-view.php?id=<?=$data['id'] ?>" class="btn btn-info btn-xs">View</a>
+                                                    <a href="data-room-sub-view.php?id=<?=$data['rsid'] ?>" class="btn btn-info btn-xs">View</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>

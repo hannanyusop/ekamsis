@@ -26,11 +26,43 @@
                 $q = "INSERT INTO rooms (block_id, floor, is_active, name) VALUES ('$block[id]', '$_POST[floor]', 1, '$name')";
 
                 if (!$db->query($q)) {
-                    echo "<script>alert('Failed to insert new room.');window.location='data-room.php?id=".$_GET['id']."'</script>";
+                    echo "<script>alert('Failed to insert new room.');window.location='data-room.php?id=" . $_GET['id'] . "'</script>";
                     exit();
-                }else{
-                    echo "<script>alert('New session successfully inserted!');window.location='data-room.php?id=".$_GET['id']."'</script>";
                 }
+
+                $room_id = $db->insert_id;
+                $inventories = $_POST['inventory_id'];
+                $max = $_POST['total'];
+                $sub = 1;
+
+                do{
+                    $sub_room_q = "INSERT INTO room_subs (room_id, code, is_active) VALUES ($room_id, $sub, 1)";
+
+                    if (!$db->query($sub_room_q)) {
+                        echo "<script>alert('Failed to insert new sub room.');window.location='data-room.php?id=".$_GET['id']."'</script>";
+                        exit();
+                    }
+
+                    $room_sub_id = $db->insert_id;
+                    foreach ($inventories as $inventory_id){
+
+                        try {
+
+                            $q_room_sub = "INSERT INTO room_sub_inventories (room_sub_id, inventory_id, remark) VALUES ($room_sub_id, $inventory_id, '')";
+                            $db->query($q_room_sub);
+
+                        }catch (Exception $e){
+
+                            $_POST = array();
+                            dd($e);
+                        }
+                    }
+
+                    $_POST = array();
+                    echo "<script>alert('New Sub room successfully inserted!');window.location='data-room.php?id=".$_GET['id']."'</script>";
+
+                    $sub++;
+                }while($sub < $max);
             }
 
             if($_POST['form'] == "add-sub-room"){
