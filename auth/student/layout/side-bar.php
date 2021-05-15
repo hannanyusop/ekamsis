@@ -8,8 +8,6 @@
             <p><?=$_SESSION['auth']['role'] ?></p>
         </div>
         <ul class="sidebar-menu">
-
-            <li><a class="sidebar-header " href="blade-components.html"><i data-feather="home"></i><span>Dashboard</span></a></li>
             <li><a class="sidebar-header" href="rent-index.php"><i data-feather="book"></i><span> Rent</span></a></li>
             <li class="">
                 <a class="sidebar-header" href="#"><i data-feather="user"></i><span>My Account</span><i class="fa fa-angle-right pull-right"></i>

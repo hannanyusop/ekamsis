@@ -79,7 +79,7 @@ $r_rent = $db->query("SELECT * FROM rents WHERE user_id=$user_id");
                                                         <?php if(is_null($data['check_in_on'])) { ?>
                                                         <a class="btn btn-success btn-sm" href="check-in.php?id=<?= $data['id']; ?>">Check-in</a>
                                                         <?php }elseif(!is_null($data['check_in_on']) && is_null($data['check_out_on'])){ ?>
-                                                            <a class="btn btn-success btn-sm" href="check-out.php?id=<?= $data['id']; ?>">Check-in</a>
+                                                            <a class="btn btn-success btn-sm" href="check-out.php?id=<?= $data['id']; ?>">Check-out</a>
                                                         <?php } ?>
                                                     <?php } ?>
                                                 </td>

@@ -21,9 +21,14 @@
             exit();
         }
 
+        if(is_null($rent['check_in_on'])){
+            echo "<script>alert('You need to check-in first.');window.location='rent-index.php'</script>";
+            exit();
+        }
+
         $rent_remark_q = $db->query("SELECT * FROM rent_remark WHERE rent_id=$rent_id");
 
-        if(isset($_POST['checkin'])){
+        if(isset($_POST['checkout'])){
 
             $target_dir = "../../assets/uploads/";
             checkDir($target_dir);
@@ -42,7 +47,7 @@
 
                     #check if file more than 10MB
                     if($_FILES['photo']['size'][$key] > 10000000){
-                        echo "<script>alert('Ops! File $cin_photo exceed file limit.(10MB)');window.location='check-in.php?id=$_GET[id]';</script>";
+                        echo "<script>alert('Ops! File $cin_photo exceed file limit.(10MB)');window.location='check-out.php?id=$_GET[id]';</script>";
                         exit();
                     }
 
@@ -55,25 +60,25 @@
                     $cin_photo = $file_location;
                 }
 
-                $update_q = "UPDATE rent_remark SET cin_ok=$cin_ok,cin_remark='$cin_remark', cin_photo = '$cin_photo' WHERE id=$key";
+                $update_q = "UPDATE rent_remark SET cout_ok=$cin_ok,cout_remark='$cin_remark', cout_photo = '$cin_photo' WHERE id=$key";
 
                 if(!$db->query($update_q)){
 
                     dd($db->error);
-                    echo "<script>alert('Database Error.');window.location='check-in.php?id=$_GET[id]';</script>";
+                    echo "<script>alert('Database Error.');window.location='check-out.php?id=$_GET[id]';</script>";
                     exit();
                 }
             }
 
-            $update_checkin = "UPDATE rents SET check_in_on=NOW() WHERE id=$_GET[id]";
+            $update_checkin = "UPDATE rents SET check_out_on=NOW() WHERE id=$_GET[id]";
 
             if(!$db->query($update_checkin)){
 
                 dd($db->error);
-                echo "<script>alert('Database Error.');window.location='check-in.php?id=$_GET[id]';</script>";
+                echo "<script>alert('Database Error.');window.location='check-out.php?id=$_GET[id]';</script>";
                 exit();
             }else{
-                echo "<script>alert('Check-in successfully!');window.location='rent-index.php';</script>";
+                echo "<script>alert('Check-out successfully!');window.location='rent-index.php';</script>";
             }
 
         }
@@ -119,14 +124,18 @@
 
                                 <form method="post" enctype="multipart/form-data">
 
-                                    <input type="hidden" name="checkin" value="true">
+                                    <input type="hidden" name="checkout" value="true">
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
                                             <td rowspan="2">Inventory</td>
                                             <td class="text-center" colspan="3">Check-in</td>
+                                            <td class="text-center" colspan="3">Check-out</td>
                                         </tr>
                                         <tr>
+                                            <td>Condition</td>
+                                            <td>Photo</td>
+                                            <td>Remark</td>
                                             <td>Condition</td>
                                             <td>Photo</td>
                                             <td>Remark</td>
@@ -141,6 +150,9 @@
                                             ?>
                                             <tr>
                                                 <td><?= $i['name']?></td>
+                                                <td><?= is_ok($remark['cin_ok']) ?></td>
+                                                <td><?= photo($remark['cin_photo']) ?></td>
+                                                <td><?= $remark['cin_remark'] ?></td>
                                                 <td>
                                                     <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                                         <div class="radio radio-primary">

@@ -12,6 +12,28 @@ function dd($var){
     var_dump($var); exit();
 }
 
+function checkDir($dir){
+
+    if (!file_exists($dir)) {
+        mkdir($dir, 0777, true);
+    }
+}
+
+function is_ok($ok){
+
+    return ($ok == 1)? "<span class='badge badge-success'>Ok</span>" : "<span class='badge badge-danger'>Broken</span>";
+}
+
+function photo($photo, $width = 100){
+
+    if(is_null($photo)){
+        return "- n/a -";
+    }else{
+
+        return  "<img class='img-fluid' src='$photo' width='$width'>";
+    }
+}
+
 function getEmailDomain($email){
 
     $parts = explode("@",$email);

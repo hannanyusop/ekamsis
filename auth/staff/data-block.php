@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once('../permission_staff.php') ?>
+<?php include_once('../permission_admin.php') ?>
 <?php
     $result = $db->query("SELECT * FROM blocks");
 ?>
@@ -13,10 +13,10 @@
 <!-- Loader ends-->
 <!-- page-wrapper Start-->
 <div class="page-wrapper">
-    <?= include('layout/top-bar.php') ?>
+    <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
             <!-- breadcrumb  Start -->
@@ -77,17 +77,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Container-fluid Ends-->
         </div>
-        <!-- footer start-->
-        <?= include('layout/footer.php'); ?>
-        <!-- footer end-->
+        <?php include('layout/footer.php'); ?>
     </div>
-    <!-- Page Body End-->
 </div>
-<!-- latest jquery-->
-
 </body>
-
 <?php include('layout/script.php'); ?>
 </html>

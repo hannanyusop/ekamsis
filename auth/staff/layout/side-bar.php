@@ -4,16 +4,15 @@
     </div>
     <div class="sidebar custom-scrollbar">
         <div class="sidebar-user text-center">
-            <div><img class="img-60 rounded-circle" src="../../../assets/images/user/1.jpg" alt="#">
-                <div class="profile-edit"><a href="edit-profile.html" target="_blank"><i data-feather="edit"></i></a></div>
-            </div>
             <h6 class="mt-3 f-14"><?=$_SESSION['auth']['fullname'] ?></h6>
             <p><?=$_SESSION['auth']['role'] ?></p>
         </div>
         <ul class="sidebar-menu">
 
             <li><a class="sidebar-header " href="index.php"><i data-feather="menu"></i><span>Dashboard</span></a></li>
+            <li><a class="sidebar-header " href="data-rent.php"><i data-feather="menu"></i><span>Renting Management</span></a></li>
 
+            <?php if($_SESSION['auth']['role'] == 'admin'){ ?>
             <li class="">
                 <a class="sidebar-header" href="#"><i data-feather="home"></i><span>Data Management</span>
                     <i class="fa fa-angle-right pull-right"></i>
@@ -22,10 +21,8 @@
                     <li><a href="data-block.php" class=""><i class="fa fa-circle"></i>Block</a></li>
                     <li><a href="data-inventory.php" class=""><i class="fa fa-circle"></i>Inventory</a></li>
                     <li><a href="data-session.php" class=""><i class="fa fa-circle"></i>Session</a></li>
-                    <li><a href="data-rent.php" class=""><i class="fa fa-circle"></i>Rent</a></li>
                 </ul>
             </li>
-
             <li class="">
                 <a class="sidebar-header" href="#"><i data-feather="users"></i><span>User Management</span>
                     <i class="fa fa-angle-right pull-right"></i>
@@ -35,6 +32,15 @@
                     <li><a href="management-staff.php" class=""><i class="fa fa-circle"></i>Staff</a></li>
                 </ul>
             </li>
+            <?php } ?>
+            <li class="">
+                <a class="sidebar-header" href="#"><i data-feather="user"></i><span>My Account</span><i class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li><a href="account-password.php"><i class="fa fa-circle"></i>Change Password</a></li>
+                </ul>
+            </li>
+            <li><a class="sidebar-header" href="../logout.php"><i data-feather="menu"></i><span>Logout</span></a></li>
         </ul>
     </div>
 </div>
