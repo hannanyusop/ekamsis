@@ -78,7 +78,7 @@ function sendEmail($recipient_email, $title = '', $body){
 
     try {
         //Server settings
-        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
         $mail->isSMTP();                                           // Send using SMTP
 
         $mail->isSMTP();                                            // Send using SMTP

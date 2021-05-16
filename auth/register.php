@@ -20,36 +20,38 @@
                             <div class="card mt-4 p-4">
                                 <h4 class="text-center">NEW USER</h4>
                                 <h6 class="text-center">Enter your Username and Password For Signup</h6>
-                                <form class="theme-form">
-                                    <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-form-label">First Name</label>
-                                                <input class="form-control" type="text" placeholder="John">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="col-form-label">Last Name</label>
-                                                <input class="form-control" type="text" placeholder="Deo">
-                                            </div>
-                                        </div>
+                                <form class="theme-form" method="post" action="verify-signup.php">
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="fullname">Name</label>
+                                        <input class="form-control text-uppercase" type="text" id="fullname" name="fullname" required>
+                                        <p id="name-help"></p>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-form-label">Matrix Number</label>
-                                        <input class="form-control" type="text" placeholder="B031910011">
+                                        <label class="col-form-label" for="matric">Matrix Number</label>
+                                        <input class="form-control text-uppercase" type="text" id="matric" name="matric_number" required>
+                                        <p id="message"></p>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-form-label">Email</label>
-                                        <input class="form-control" type="text" placeholder="B031910011@student.utem.edu.my">
+                                        <label class="col-form-label" for="email">Email</label>
+                                        <input class="form-control" type="text" id="email" name="email" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-form-label">Password</label>
-                                        <input class="form-control" type="password" placeholder="**********">
+                                        <label class="col-form-label" for="phone_number">Phone Number</label>
+                                        <input class="form-control" type="text" id="phone_number" name="phone_number" required>
+                                        <p id="phone-help"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="password">Password</label>
+                                        <input class="form-control" type="password" id="password" name="password" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="confirm_password">Confirm Password</label>
+                                        <input class="form-control" type="password" id="confirm_password" name="confirm_password" required>
+                                        <p id="password-help"></p>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-sm-4">
-                                            <button class="btn btn-primary" type="submit">Sign Up</button>
+                                            <button class="btn btn-primary" type="submit" id="register" name="register">Sign Up</button>
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="text-left mt-2 m-l-20">Are you already user?  <a class="btn-link text-capitalize" href="login.php">Login</a></div>
@@ -71,4 +73,90 @@
 </body>
 
 <?php include('layout/script.php'); ?>
+<script type="text/javascript">
+    $(function (){
+        $("#register").attr('disabled', true);
+
+        valid_phone = valid_name =  valid_password = valid_matric = false;
+
+        $("#fullname").on("keyup", function() {
+            if ( $(this).val().match('^[a-zA-Z]{3,16}$') ) {
+
+                if($(this).val().length < 5){
+                    valid_name = false;
+                    $('#name-help').html('Invalid Name. You should insert your name and family name').css('color', 'red');
+                }else{
+                    $('#name-help').hide();
+                    valid_name = true;
+                }
+            } else {
+                valid_name = false;
+                $('#name-help').html('Invalid Name').css('color', 'red');
+            }
+            checkBtn();
+        });
+
+        // $("#phone_number").on("keyup", function() {
+        //     if ( $(this).val().match('^[0-9]{3,16}$') ) {
+        //
+        //         $('#phone-help').hide();
+        //         valid_phone = true;
+        //     } else {
+        //         valid_phone = false;
+        //         $('#phone-help').html('Invalid phone number. You should insert only a number.').css('color', 'red');
+        //     }
+        //     checkBtn();
+        // });
+
+
+        $("#matric").keyup(function (){
+
+            v = $(this).val();
+            if(v.length == 10){
+                valid_matric = true;
+                $('#message').hide();
+            } else{
+                valid_matric = false;
+                $('#message').html('Matric Number should have 10 character.').css('color', 'red').show();
+
+            }
+            domain = "@"+'student.utem.edu.my';
+            $("#email").val($(this).val()+domain);
+            checkBtn();
+        });
+
+        $('#password, #confirm_password').on('keyup', function () {
+
+            if ($('#password').val() == $('#confirm_password').val()) {
+
+                if($('#password').val().length < 5){
+
+                    valid_password = false;
+                    $('#password-help').html('Password should have minimum 5 character.').css('color', 'red');
+                }else {
+                    $('#password-help').hide();
+                    valid_password = true;
+                }
+
+            } else {
+                valid_password = false;
+                $('#password-help').html('Password Not Matching').css('color', 'red');
+            }
+
+            checkBtn();
+        });
+
+
+        function checkBtn(){
+
+            valid_phone = true;
+
+            if(valid_phone = true && valid_matric == true && valid_name == true && valid_password == true){
+                $("#register").attr('disabled', false);
+            }else{
+                $("#register").attr('disabled', true);
+            }
+        }
+    })
+</script>
 </html>
