@@ -21,6 +21,9 @@ function checkDir($dir){
 
 function is_ok($ok){
 
+    if(is_null($ok)){
+        return  "";
+    }
     return ($ok == 1)? "<span class='badge badge-success'>Ok</span>" : "<span class='badge badge-danger'>Broken</span>";
 }
 
@@ -73,13 +76,19 @@ function sendEmail($recipient_email, $title = '', $body){
     $GLOBALS['smtp_host'] = 'smtp.mail.yahoo.com';
 
 
+    if($GLOBALS['env'] != 'production'){
+        $recipient_email = $GLOBALS['email_test'];
+    }
 
     $mail = new PHPMailer(true);
 
     try {
+
+        if($GLOBALS['env'] != 'production'){
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->isSMTP();                                           // Send using SMTP
+        }
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-        $mail->isSMTP();                                           // Send using SMTP
 
         $mail->isSMTP();                                            // Send using SMTP
         $mail->Host       = $GLOBALS['smtp_host'];                    // Set the SMTP server to send through

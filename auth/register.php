@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-sm-4">
-                                            <button class="btn btn-primary" type="submit" id="register" name="register">Sign Up</button>
+                                            <button class="btn btn-primary" type="submit" name="register">Sign Up</button>
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="text-left mt-2 m-l-20">Are you already user?  <a class="btn-link text-capitalize" href="login.php">Login</a></div>
@@ -75,7 +75,7 @@
 <?php include('layout/script.php'); ?>
 <script type="text/javascript">
     $(function (){
-        $("#register").attr('disabled', true);
+        // $("#register").attr('disabled', true);
 
         valid_phone = valid_name =  valid_password = valid_matric = false;
 
@@ -148,10 +148,10 @@
 
 
         function checkBtn(){
+            $("#register").attr('disabled', false);
 
-            valid_phone = true;
-
-            if(valid_phone = true && valid_matric == true && valid_name == true && valid_password == true){
+            console.log("matric " +valid_matric +" name :"+ valid_name +" password:"+  valid_password)
+            if( valid_matric == true && valid_name == true && valid_password == true){
                 $("#register").attr('disabled', false);
             }else{
                 $("#register").attr('disabled', true);

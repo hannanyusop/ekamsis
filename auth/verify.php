@@ -22,6 +22,10 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 #check password hashing
                 if (password_verify($password, $user['password'])) {
 
+                    if($user['verified_at'] == null){
+                        echo "<script>alert('You need to verify account first.!');window.location='login.php'</script>";
+                    }
+
                     $_SESSION['auth'] = [
                         'user_id' => (int)$user['id'],
                         'fullname' => $user['fullname'],

@@ -3,13 +3,10 @@
 require_once '../env.php';
 
         $fullname = "Hannan Yusop";
-//        $fullname = strtoupper($_POST['full_name']);
-//        $matric_number = $_POST['matric_number'];
         $matric_number = "B031910175";
         $email = $matric_number."@".$GLOBALS['student_mail_domain'];
 
         $password = randomPassword();
-//        $password = $_POST['password'];
         $token = sha1(mt_rand(1, 90000) . 'SALT');
 
         $hash_pass = password_hash($password, PASSWORD_BCRYPT);
@@ -29,7 +26,6 @@ require_once '../env.php';
             </small>
             </p>";
 
-        $email = "hannan135589@gmail.com";
         $x = sendEmail($email, "Account Verification", $body);
 
         dd($x);

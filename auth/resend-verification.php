@@ -12,27 +12,20 @@
                   <div class="card mt-4">
                     <div class="card-body">
                       <div class="text-center">
-                        <h4>LOGIN</h4>
-                        <h6>Enter your Username and Password </h6>
+                        <h4>Resend Verification</h4>
                       </div>
-                      <form class="theme-form" method="post" action="verify.php">
+                      <form class="theme-form" method="post" action="verify-resend.php">
                         <div class="form-group">
                           <label class="col-form-label pt-0" for="email">Email</label>
                           <input class="form-control" type="email" name="email" id="email">
                         </div>
-                        <div class="form-group">
-                          <label class="col-form-label" for="password">Password</label>
-                          <input class="form-control" type="password" name="password" id="password">
-                        </div>
                         <div class="form-group form-row mt-3 mb-0">
-                          <button class="btn btn-primary btn-block" type="submit">Login</button>
+                          <button class="btn btn-primary btn-block" type="submit">Resend Email Invitation</button>
                         </div>
 
                           <div class="form-row">
-                              <div class="col-sm-12 text-center">
-                                  <div class="mt-2 m-l-20">Register Account Here?&nbsp;&nbsp;<a class="btn-link text-capitalize" href="register.php">Register</a><br> Or<br>
-                                     Resend link invitation&nbsp;&nbsp;<a class="btn-link text-capitalize" href="resend-verification.php">here</a>
-                                  </div>
+                              <div class="col-sm-12">
+                                  <div class="text-left mt-2 m-l-20">Back to&nbsp;&nbsp;<a class="btn-link text-capitalize" href="login.php">Login</a> page.</div>
                               </div>
                           </div>
                       </form>

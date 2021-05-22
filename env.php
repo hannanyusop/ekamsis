@@ -30,6 +30,13 @@ $GLOBALS['smtp_password'] = '';
 $GLOBALS['smtp_host'] = 'smtp.mail.yahoo.com';
 $GLOBALS['admin_email'] = 'ecenterprinting@yahoo.com';
 
+$GLOBALS['url'] = 'http://ekamsis.testh';
+
+#go to this link https://temp-mail.org/en/ and get temp email for testing
+
+$GLOBALS['email_test'] = 'fivolam705@isecv.com';
+$GLOBALS['env'] = 'development'; # 'production' / 'development'
+
 $GLOBALS['xampp_macos'] = true;
 $GLOBALS['send_email'] = true;
 

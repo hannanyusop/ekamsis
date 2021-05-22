@@ -43,7 +43,7 @@
         echo "<script>alert('Invalid parameter.');window.location='rent-index.php'</script>";
     }
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
 
@@ -53,7 +53,7 @@
     <?= include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
         <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
             <!-- breadcrumb  Start -->
@@ -74,29 +74,39 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-md-12">
+                        <a href="#" class="btn btn-warning m-2 float-right" onclick="saveAsPDF()"><span class="fa fa-download"></span>Print As PDF</a>
+                    </div>
+                    <div class="col-sm-12" id="printableArea">
                         <div class="card">
                             <div class="card-body">
-
-                                <div class="row mb-4">
-                                    <div class="col-md-4">
+                                <div class="text-center mb-5">
+                                    <b>BORANG SEMAKAN INVENTORI KOLEJ KEDIAMAN UTeM KAMPUS INDUK</b><br>
+                                    Jalan Hang Tuah Jaya, 76100 Durian Tunggal, Melaka<br>
+                                    Tel:+606 270 1000  |    Fax:+606 270 1022   | Email: kamsis@utem.edu.my
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
                                         <span>NAME : <b><?= $user['fullname'] ?></b></span><br>
                                         <span>MATRIC NUMBER : <b><?= $user['matric_number']; ?></b></span><br>
                                         <span>PHONE NO. : <b><?= $user['phone_number']; ?></b></span>
                                     </div>
-                                    <div class="col-md-4">
-                                        <span>SESSION : <b><?= $session['name'] ?></b></span><br>
-                                        <span>CHECK-IN ON: <b><?= $rent['check_in_on'] ?></b></span><br>
-                                        <span>CHECK-OUT ON: <b><?= $rent['check_out_on'] ?></b></span>
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <span>BlOCK :<?= $block['name'] ?></span><br>
                                         <span>FLOOR :<?= $rs['floor'] ?></span><br>
                                         <span>ROOM : <?= $rs['floor']." ".$rs['name']." - ".$rs['code'] ?></span>
                                     </div>
                                 </div>
 
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <span>SESSION : <b><?= $session['name'] ?></b></span><br>
+                                        <span>CHECK-IN ON: <b><?= $rent['check_in_on'] ?></b></span><br>
+                                        <span>CHECK-OUT ON: <b><?= $rent['check_out_on'] ?></b></span>
+                                    </div>
+                                </div>
 
+                                <hr>
                                 <form method="post" enctype="multipart/form-data">
 
                                     <input type="hidden" name="checkout" value="true">
@@ -136,6 +146,17 @@
                                         </tbody>
                                     </table>
                                 </form>
+
+                                <div class="d-flex justify-content-between bd-highlight mt-5">
+                                    <div class="">
+                                        ___________________<br>
+
+                                    </div>
+                                    <div class="">
+                                        ___________________<br>
+                                        (<?= $user['fullname'] ?>)
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,6 +174,21 @@
 
 </body>
 
-<?= include('layout/script.php'); ?>
-<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
+<?php include('layout/script.php'); ?>
+<script>
+
+    function saveAsPDF() {
+        var element = document.getElementById('printableArea');
+        var opt = {
+            margin: 0.2,
+            filename: "<?= $user['fullname'].time() ?>.pdf",
+            image: {type: 'jpeg', quality: 1},
+            html2canvas: {scale: 3, dpi: 72, letterRendering: true,
+                windowWidth: 1024},
+            jsPDF: {unit: 'in', format: 'A4'}
+        };
+        html2pdf().set(opt).from(element).save();
+    }
+
+</script>
 </html>
