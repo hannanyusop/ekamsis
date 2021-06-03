@@ -27,7 +27,7 @@ require_once '../env.php';
 
         $hash_pass = password_hash($password, PASSWORD_BCRYPT);
         if (!$db->query("UPDATE users SET password='$hash_pass',verify_token= '$token' WHERE id='$user[id]'")) {
-            echo "Error: Inserting user data." . $db->error; exit();
+            echo "Error: Updating user data." . $db->error; exit();
         }else{
 
             $link = $GLOBALS['url'].'/auth/validate.php?token='.$token;

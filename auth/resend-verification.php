@@ -8,12 +8,10 @@
             <div class="col-md-12">
               <div class="auth-innerright">
                 <div class="authentication-box">
-                  <div class="text-center"><img src="../assets/images/endless-logo.png" alt=""></div>
-                  <div class="card mt-4">
-                    <div class="card-body">
-                      <div class="text-center">
-                        <h4>Resend Verification</h4>
-                      </div>
+                    <div class="text-center"><img class="utem-logo" src="../assets/images/endless-logo.png" alt="logo"></div>
+                    <div class="card mt-4 p-4">
+<!--                        <h4>--><?//= $GLOBALS['APP_NAME'] ?><!--</h4>-->
+                        <h6 class="text-center">Resend Verification </h6>
                       <form class="theme-form" method="post" action="verify-resend.php">
                         <div class="form-group">
                           <label class="col-form-label pt-0" for="email">Email</label>

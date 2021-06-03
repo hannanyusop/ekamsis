@@ -27,6 +27,11 @@ function is_ok($ok){
     return ($ok == 1)? "<span class='badge badge-success'>Ok</span>" : "<span class='badge badge-danger'>Broken</span>";
 }
 
+function isActive($ok){
+
+    return ($ok == 1)? "<span class='badge badge-success'>Active</span>" : "<span class='badge badge-danger'>Inactive</span>";
+}
+
 function photo($photo, $width = 100){
 
     if(is_null($photo)){
@@ -118,101 +123,6 @@ function sendEmail($recipient_email, $title = '', $body){
     }
 }
 
-//function SsendEmail(){
-//    $recipient_email = 'nan_s96@yahoo.com';
-//
-//    $GLOBALS['smtp_username'] = 'ecenterprinting@yahoo.com';
-//    $GLOBALS['smtp_password'] = 'idwfwfybfmqgkgfc';
-//    $GLOBALS['smtp_host'] = 'smtp.mail.yahoo.com';
-//    $GLOBALS['admin_email'] = 'nan_s96@yahoo.com';
-//
-//
-//
-//
-//// Instantiation and passing `true` enables exceptions
-//    $mail = new PHPMailer(true);
-//
-//    try {
-//        //Server settings
-//        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-//        $mail->isSMTP();                                           // Send using SMTP
-//
-//        $mail->isSMTP();                                            // Send using SMTP
-//        $mail->Host       = $GLOBALS['smtp_host'];                    // Set the SMTP server to send through
-//        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-//        $mail->Username   = $GLOBALS['smtp_username'];                     // SMTP username
-//        $mail->Password   = $GLOBALS['smtp_password'];                               // SMTP password
-//        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-//        $mail->Port       = 587;
-//        //Recipients
-//        $mail->setFrom('ecenterprinting@yahoo.com', 'nor-reply ECP');
-//        $mail->addAddress($recipient_email);     // Add a recipient
-//
-////    // Attachments
-////    $mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-////    $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-//
-//        // Content
-//        $mail->isHTML(true);                                  // Set email format to HTML
-//        $mail->Subject = 'Here is the subject';
-//        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-//        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-//
-//        $mail->send();
-//        echo 'Message has been sent';
-//    } catch (Exception $e) {
-//        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-//    }
-//}
-//
-//function sendEmailOld($recipient_email, $subject, $body){
-//
-//
-//    #check $GLOBALS['send_email']
-//
-//    if(!$GLOBALS['send_email']){
-//        return true;
-//    }
-//
-//
-//    if($GLOBALS['xampp_macos']){
-//
-//        include '../vendor/autoload.php';
-//
-//    }else{
-//        require $_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php";
-//    }
-//
-//    $mail = new PHPMailer(true);
-//
-//    try {
-//        //Server settings
-//        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-//        $mail->isSMTP();                                            // Send using SMTP
-//        $mail->Host       = $GLOBALS['smtp_host'];                    // Set the SMTP server to send through
-//        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-//        $mail->Username   = $GLOBALS['smtp_username'];                     // SMTP username
-//        $mail->Password   = $GLOBALS['smtp_password'];                               // SMTP password
-//        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-//        $mail->Port       = 25;                                    // TCP port to connect to
-//
-//        //Recipients
-//        $mail->setFrom('ecenterprinting@yahoo.com', 'nor-reply ECP');
-//        $mail->addAddress($recipient_email);     // Add a recipient
-//
-//        // Content
-//        $mail->isHTML(true);                                  // Set email format to HTML
-//        $mail->Subject = $subject;
-//        $mail->Body    = $body;
-////        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-//
-//        $mail->send();
-//        return true;
-//    } catch (Exception $e) {
-//        return false;
-////        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-//    }
-//}
 
 function randomPassword() {
     $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';

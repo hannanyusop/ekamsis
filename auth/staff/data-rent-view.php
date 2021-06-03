@@ -2,27 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once('../permission_user.php') ?>
+<?php include_once('../permission_staff.php') ?>
 <?php
 
     if(isset($_GET['id'])){
         $rent_id = $_GET['id'];
 
-        $r_rent = $db->query("SELECT * FROM rents WHERE user_id=$user_id AND id=$rent_id");
+        $r_rent = $db->query("SELECT * FROM rents WHERE id=$rent_id");
         $rent = $r_rent->fetch_assoc();
 
         if(!$rent){
             echo "<script>alert('Invalid data.');window.location='rent-index.php'</script>";
-            exit();
-        }
-
-        if($current_session['id'] != $rent['session_id']){
-            echo "<script>alert('Invalid session.');window.location='rent-index.php'</script>";
-            exit();
-        }
-
-        if(is_null($rent['check_in_on'])){
-            echo "<script>alert('You need to check-in first.');window.location='rent-index.php'</script>";
             exit();
         }
 
@@ -61,7 +51,7 @@
                             <div class="page-header-left">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i class="fa fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="rent-index.php">Rent</a> </li>
+                                    <li class="breadcrumb-item"><a href="data-rent.php">Rent</a> </li>
                                     <li class="breadcrumb-item">View</li>
                                 </ol>
                             </div>

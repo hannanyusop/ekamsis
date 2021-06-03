@@ -8,12 +8,11 @@
             <div class="col-md-12">
               <div class="auth-innerright">
                 <div class="authentication-box">
-                  <div class="text-center"><img src="../assets/images/endless-logo.png" alt=""></div>
+                    <div class="text-center"><img class="utem-logo" src="../assets/images/endless-logo.png" alt="logo"></div>
                   <div class="card mt-4">
                     <div class="card-body">
                       <div class="text-center">
-                        <h4>LOGIN</h4>
-                        <h6>Enter your Username and Password </h6>
+                        <h6>Login </h6>
                       </div>
                       <form class="theme-form" method="post" action="verify.php">
                         <div class="form-group">

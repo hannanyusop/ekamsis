@@ -4,17 +4,22 @@
 
 <?php include_once('../permission_admin.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM inventories");
+    $result = $db->query("SELECT * FROM staff");
 
-//    if($_GET['delete']){
-//
-//        $id = $_GET['id'];
-//        $db->query("DELETE FROM inventories WHERE id=$id");
-//        $db->query("DELETE FROM inventories WHERE id=$id");
-//
-//    }
+    if(isset($_GET['delete'])){
+
+        $id = $_GET['delete'];
+        if($id == 1){
+            echo "<script>alert('Access denied!');window.location='management-staff.php'</script>";
+            exit();
+        }
+
+        $db->query("DELETE from staff WHERE id=$id");
+        echo "<script>alert('User deleted!');window.location='management-staff.php'</script>";
+
+    }
 ?>
-<?php include('layout/head.php'); ?>
+<?= include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
 
@@ -36,14 +41,16 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item">Inventory</li>
+                                    <li class="breadcrumb-item">Staff</li>
                                 </ol>
                             </div>
                         </div>
                         <div class="col">
                             <div class="bookmark pull-right">
                                 <ul>
-                                    <li><a href="data-inventory-add.php" class="btn btn-info text-white"><i class="fa fa-plus mr-1"></i> Add New Inventory</a> </li>
+                                    <li>
+                                        <a href="management-staff-add.php" class="btn btn-primary">Add Staff</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -60,21 +67,25 @@
                                     <table class="display table-sm" id="datatable">
                                         <thead>
                                         <tr>
+                                            <th>Id</th>
+                                            <th>Email</th>
                                             <th>Name</th>
-                                            <th>Remark</th>
-                                            <th>Active</th>
+                                            <th>Role</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php while($data = $result->fetch_assoc()){ ;?>
                                             <tr>
-                                                <td><?= $data['name']; ?></td>
-                                                <td><?= strLimit($data['remark'], 20); ?></td>
-                                                <td><?= isActive($data['is_active']) ?></td>
+                                                <td><?= $data['id']; ?></td>
+                                                <td><?= strLimit($data['email'], 100); ?></td>
+                                                <td><?= $data['fullname']; ?></td>
+                                                <td><?= $data['role']; ?></td>
                                                 <td>
-                                                    <a href="data-inventory-edit.php?id=<?= $data['id'] ?>" class="btn btn-info btn-xs" type="button">Edit</a>
-<!--                                                    <a href="data-inventory.php?delete=--><?//= $data['id'] ?><!--" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure want to delete this inventory? (All data related to this inventory will be deleted too.)')">Delete</a>-->
+                                                    <?php if($data['id'] != 1){ ?>
+                                                    <a href="" class="btn btn-info btn-xs" type="button">Edit</a>
+                                                    <a href="management-staff.php?delete=<?= $data['id']?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure want to delete this staff?')">Delete</a>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>
@@ -86,15 +97,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Container-fluid Ends-->
         </div>
-        <!-- footer start-->
         <?php include('layout/footer.php'); ?>
-        <!-- footer end-->
     </div>
-    <!-- Page Body End-->
 </div>
-<!-- latest jquery-->
 
 </body>
 

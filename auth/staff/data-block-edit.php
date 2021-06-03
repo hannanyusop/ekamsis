@@ -4,34 +4,44 @@
 
 <?php include_once('../permission_admin.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM inventories");
+    if(isset($_GET['id'])){
 
-    if(isset($_POST['name'])){
+        $q_block = $db->query("SELECT * FROM blocks WHERE id=$_GET[id]");
 
+        $block = $q_block->fetch_assoc();
 
-        $is_active = (isset($_POST['is_active']))? 1 : 0;
-        $inventory = "INSERT INTO inventories (name, remark, is_active) VALUES ('$_POST[name]', '$_POST[remark]', $is_active)";
-        if (!$db->query($inventory)) {
-            echo "Error: " . $inventory . "<br>" . $db->error; exit();
-        }else{
-            echo "<script>alert('New inventory successfully inserted!');window.location='data-inventory.php'</script>";
+        if(!$block){
+            echo "<script>alert('Block not exist!');window.location='data-block.php';</script>";
+            exit();
         }
+
+        if(isset($_POST['name'])){
+
+
+            $name = strtoupper($_POST['name']);
+            $is_active = (isset($_POST['is_active']))? 1 : 0;
+            $update = "UPDATE blocks set name='$name' WHERE id='$_GET[id]'";
+            if (!$db->query($update)) {
+                echo "Error: " . $update . "<br>" . $db->error; exit();
+            }else{
+                echo "<script>alert('Block successfully updated!');window.location='data-block.php'</script>";
+            }
+        }
+
+    }else{
+        echo "<script>alert('Invalid URL!');window.location='data-block.php'</script>";
+
     }
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
-
-<!-- Loader ends-->
-<!-- page-wrapper Start-->
 <div class="page-wrapper">
     <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
         <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
-            <!-- breadcrumb  Start -->
             <div class="container-fluid">
                 <div class="page-header">
                     <div class="row">
@@ -40,8 +50,8 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">Data Management</li>
-                                    <li class="breadcrumb-item active"><a href="data-inventory.php">Inventory</a> </li>
-                                    <li class="breadcrumb-item">Add</li>
+                                    <li class="breadcrumb-item active"><a href="data-block.php">Block</a> </li>
+                                    <li class="breadcrumb-item">Edit</li>
                                 </ol>
                             </div>
                         </div>
@@ -53,27 +63,16 @@
                 <div class="row">
                     <div class="col-sm-8 offset-md-2">
                         <div class="card">
-                            <div class="card-header">
-                                <h5>Add New Inventory</h5>
-                            </div>
                             <div class="card-body">
                                 <form class="theme-form" method="post">
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="name">Name</label>
-                                        <input class="form-control" name="name" id="name"  type="text" placeholder="EX : Meja Belajar" data-original-title="" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="remark">Remark</label>
-                                        <textarea class="form-control" name="remark" id="remark" type="password" placeholder="Password" rows="5"></textarea>
-                                    </div>
-                                    <div class="checkbox p-0">
-                                        <input id="is_active" type="checkbox" name="is_active">
-                                        <label class="mb-0" for="is_active">Active</label>
+                                        <input class="form-control text-uppercase" name="name" id="name" value="<?= $block['name'] ?>"  type="text" required>
                                     </div>
                                     <div class="form-group">
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            <a href="data-inventory.php" class="btn btn-secondary" data-original-title="" title="">Cancel</a>
+                                            <a href="data-inventory.php" class="btn btn-secondary">Cancel</a>
                                         </div>
                                     </div>
                                 </form>
@@ -95,6 +94,5 @@
 
 </body>
 
-<?= include('layout/script.php'); ?>
-<!-- Mirrored from laravel.pixelstrap.com/endless/sample-page by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 03 Nov 2020 07:18:47 GMT -->
+<?php include('layout/script.php'); ?>
 </html>

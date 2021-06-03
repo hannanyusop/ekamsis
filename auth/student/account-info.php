@@ -35,17 +35,14 @@ if(isset($_POST['phone_number'])){
     }
 }
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
 
-<!-- Loader ends-->
-<!-- page-wrapper Start-->
 <div class="page-wrapper">
-    <?= include('layout/top-bar.php') ?>
+    <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
             <!-- breadcrumb  Start -->
@@ -76,7 +73,7 @@ if(isset($_POST['phone_number'])){
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label" for="fullname">Name</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" id="fullname" name="fullname" value="<?= $user['fullname']?>" type="text" readonly>
+                                                    <input class="form-control" id="fullname" name="fullname" value="<?= $user['fullname']?>" type="text" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -86,7 +83,7 @@ if(isset($_POST['phone_number'])){
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label" for="email">Email</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" id="email" name="email" value="<?= $user['email']?>" type="text" readonly>
+                                                    <input class="form-control" id="email" name="email" value="<?= $user['email']?>" type="text" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +93,7 @@ if(isset($_POST['phone_number'])){
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label" for="matric_number">Matric Number</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" id="matric_number" name="matric_number" value="<?= $user['matric_number']?>" type="text" readonly>
+                                                    <input class="form-control" id="matric_number" name="matric_number" value="<?= $user['matric_number']?>" type="text" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,10 +120,10 @@ if(isset($_POST['phone_number'])){
                 </div>
             </div>
         </div>
-        <?= include('layout/footer.php'); ?>
+        <?php include('layout/footer.php'); ?>
     </div>
 </div>
 </body>
 
-<?= include('layout/script.php'); ?>
+<?php include('layout/script.php'); ?>
 </html>

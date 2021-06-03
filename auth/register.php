@@ -16,10 +16,9 @@
                 <div class="col-sm-12 p-0">
                     <div class="auth-innerright">
                         <div class="authentication-box">
-                            <div class="text-center"><img src="../assets/images/endless-logo.png" alt=""></div>
+                            <div class="text-center"><img class="utem-logo" src="../assets/images/endless-logo.png" alt="logo"></div>
                             <div class="card mt-4 p-4">
-                                <h4 class="text-center">NEW USER</h4>
-                                <h6 class="text-center">Enter your Username and Password For Signup</h6>
+                                <h6 class="text-center">Register </h6>
                                 <form class="theme-form" method="post" action="verify-signup.php">
                                     <div class="form-group">
                                         <label class="col-form-label" for="fullname">Name</label>

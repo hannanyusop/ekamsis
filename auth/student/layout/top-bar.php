@@ -3,7 +3,7 @@
         <div class="main-header-left d-lg-none">
             <div class="logo-wrapper">
                 <a href="#">
-                    <img src="../../../assets/images/endless-logo.png" alt="">
+                    <img class="utem-logo" src="../../assets/images/endless-logo.png" alt="logo">
                 </a>
             </div>
         </div>

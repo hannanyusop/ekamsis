@@ -8,7 +8,7 @@
 
     $session = $q_session->fetch_assoc();
 
-    $r_rent = $db->query("SELECT * FROM rents r LEFT JOIN users u ON u.id = r.user_id WHERE session_id='$session[id]'");
+    $r_rent = $db->query("SELECT * FROM rents WHERE session_id='$session[id]'");
 
 
     if(isset($_GET['delete'])){
@@ -109,16 +109,20 @@
 
                                                 <?php
                                                         $rs_q = $db->query("SELECT rs.id as sub_id, floor,name,code FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE rs.id= $data[room_sub_id]");
-                                                        $rs = $rs_q->fetch_assoc()
+                                                        $rs = $rs_q->fetch_assoc();
+
+                                                        $student_q = $db->query("SELECT * FROM users WHERE id='$data[user_id]'");
+                                                        $student = $student_q->fetch_assoc()
+
                                                 ?>
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
-                                                <td><?= strLimit($data['fullname'], 20); ?></td>
+                                                <td><?= strLimit($student['fullname'], 20); ?></td>
                                                 <td><?= $rs['floor']." ".$rs['name']." - ".$rs['code'] ?></td>
                                                 <td class="text-center"><?= (!is_null($data['check_in_on']))? $data['check_in_on'] : "Not Yet"; ?></td>
                                                 <td class="text-center"><?= (!is_null($data['check_out_on']))? $data['check_out_on'] : "Not Yet"; ?></td>
                                                 <td>
-                                                    <a class="btn btn-primary btn-sm" href="">View</a>
+                                                    <a class="btn btn-primary btn-sm" href="data-rent-view.php?id=<?= $data['id']; ?>">View</a>
                                                     <a class="btn btn-warning btn-sm" href="data-rent.php?reset=<?= $data['id']; ?>" onclick="return confirm('Are you sure want to reset this data?')">Reset</a>
                                                     <a class="btn btn-danger btn-sm" href="data-rent.php?delete=<?= $data['id']; ?>" onclick="return confirm('Are you sure want to delete this data?')">Delete</a>
                                                 </td>

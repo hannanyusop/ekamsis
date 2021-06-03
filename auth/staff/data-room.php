@@ -22,9 +22,6 @@
 
         $r_rooms = $db->query("SELECT * FROM rooms WHERE block_id=$_GET[id]");
 
-        $result = $db->query("SELECT 
-rs.id as rsid, floor,name,code
- FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE block_id=$_GET[id]");
     }else{
         dd('stop');
     }
@@ -32,17 +29,12 @@ rs.id as rsid, floor,name,code
 <?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
-
-<!-- Loader ends-->
-<!-- page-wrapper Start-->
 <div class="page-wrapper">
-    <?= include('layout/top-bar.php') ?>
+    <?php include('layout/top-bar.php') ?>
     <div class="page-body-wrapper">
-        <!-- Page Sidebar Start-->
-        <?= include('layout/side-bar.php'); ?>
+        <?php include('layout/side-bar.php'); ?>
 
         <div class="page-body">
-            <!-- breadcrumb  Start -->
             <div class="container-fluid">
                 <div class="page-header">
                     <div class="row">
@@ -143,17 +135,25 @@ rs.id as rsid, floor,name,code
                                             <th>Id</th>
                                             <th>Name</th>
                                             <th>Floor</th>
+                                            <th>Total Sub Room</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($data = $result->fetch_assoc()){ ;?>
+                                        <?php while($data = $r_rooms->fetch_assoc()){
+
+//                                            $result = $db->query("SELECT rs.id as rsid, floor,name,codeFROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE block_id=$_GET[id]");
+
+                                            $rs = $db->query("SELECT * FROM room_subs WHERE room_id=$data[id]");
+                                        ?>
+
                                             <tr>
-                                                <td><?= $data['rsid']; ?></td>
-                                                <td><?= $data['floor']." ".$data['name']." - ".$data['code'] ?></td>
+                                                <td><?= $data['id']; ?></td>
+                                                <td><?= $data['name'] ?></td>
                                                 <td><?= $data['floor']; ?></td>
+                                                <td><?= $rs->num_rows; ?></td>
                                                 <td>
-                                                    <a href="data-room-sub-view.php?id=<?=$data['rsid'] ?>" class="btn btn-info btn-xs">View</a>
+                                                    <a href="data-room-edit.php?id=<?=$data['id'] ?>" class="btn btn-info btn-xs">Edit</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>

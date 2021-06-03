@@ -39,7 +39,7 @@ if(isset($_POST['password'])){
     }
 }
 ?>
-<?= include('layout/head.php'); ?>
+<?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
 
@@ -123,7 +123,7 @@ if(isset($_POST['password'])){
 </div>
 </body>
 
-<?= include('layout/script.php'); ?>
+<?php include('layout/script.php'); ?>
 <script type="text/javascript">
     $('#new_password, #confirm_password').on('keyup', function () {
         if ($('#new_password').val() == $('#confirm_password').val()) {

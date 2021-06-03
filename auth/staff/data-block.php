@@ -65,7 +65,8 @@
                                                 <td><?= strLimit($data['name'], 20); ?></td>
                                                 <td><?= implode(",", json_decode($data['floor_list'])) ?></td>
                                                 <td>
-                                                    <a href="data-room.php?id=<?=$data['id'] ?>" class="btn btn-danger btn-xs">Manage Room</a>
+                                                    <a href="data-block-edit.php?id=<?=$data['id'] ?>" class="btn btn-success btn-xs">Edit</a>
+                                                    <a href="data-room.php?id=<?=$data['id'] ?>" class="btn btn-info btn-xs">Manage Room</a>
                                                 </td>
                                             </tr>
                                         <?php } ?>
