@@ -2,3 +2,5 @@
 .idea/
 
 assets/uploads/
+
+env.php

@@ -6,7 +6,8 @@
 <?php
     if(isset($_GET['id'])){
 
-        $q_block = $db->query("SELECT * FROM blocks WHERE id=$_GET[id]");
+        $block_id = $_GET['id'];
+        $q_block = $db->query("SELECT * FROM blocks WHERE id=$block_id");
 
         $block = $q_block->fetch_assoc();
 
@@ -17,6 +18,12 @@
 
         if(isset($_POST['name'])){
 
+
+            if(!in_array($_POST['gender'], array_keys(getGender()))){
+                echo "<script>alert('Invalid gender!');window.location='data-block-edit.php?id=$block_id'</script>";
+            }
+
+            $gender = $_POST['gender'];
 
             $name = strtoupper($_POST['name']);
             $is_active = (isset($_POST['is_active']))? 1 : 0;
@@ -69,10 +76,20 @@
                                         <label class="col-form-label pt-0" for="name">Name</label>
                                         <input class="form-control text-uppercase" name="name" id="name" value="<?= $block['name'] ?>"  type="text" required>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label pt-0" for="name">For (Gender)</label>
+                                        <select id="gender" name="gender" class="form-control">
+                                            <?php foreach (getGender() as $gender => $g_name){?>
+                                                <option value="<?= $gender ?>" <?= ($gender == $block['for_gender'])? "selected" : "" ?>><?=$g_name ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="card-footer">
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            <a href="data-inventory.php" class="btn btn-secondary">Cancel</a>
+                                            <a href="data-block.php" class="btn btn-secondary">Cancel</a>
                                         </div>
                                     </div>
                                 </form>

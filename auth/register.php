@@ -26,6 +26,15 @@
                                         <p id="name-help"></p>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-form-label" for="gender">Gender</label>
+                                        <select id="gender" name="gender" class="form-control">
+                                            <?php foreach (getGender() as $gender => $g_name){?>
+                                            <option value="<?= $gender ?>" selected><?=$g_name ?></option>
+                                            <?php } ?>
+                                        </select>
+                                        <p id="name-help"></p>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-form-label" for="matric">Matrix Number</label>
                                         <input class="form-control text-uppercase" type="text" id="matric" name="matric_number" required>
                                         <p id="message"></p>

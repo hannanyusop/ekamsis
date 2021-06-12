@@ -10,8 +10,14 @@
         $floor_list = json_encode(explode(",",$_POST['floor']));
         $name = strtoupper($_POST['name']);
 
+        if(!in_array($_POST['gender'], array_keys(getGender()))){
+            echo "<script>alert('Invalid gender!');window.location='data-block-add.php'</script>";
+        }
+
+        $gender = $_POST['gender'];
+
         $is_active = (isset($_POST['is_active']))? 1 : 0;
-        $inventory = "INSERT INTO blocks (name, floor_list) VALUES ('$name', '$floor_list')";
+        $inventory = "INSERT INTO blocks (name,for_gender, floor_list) VALUES ('$name', '$gender', '$floor_list')";
         if (!$db->query($inventory)) {
             echo "Error: " . $inventory . "<br>" . $db->error; exit();
         }else{
@@ -62,6 +68,14 @@
                                     <div class="form-group">
                                         <label class="col-form-label pt-0" for="name">Name</label>
                                         <input class="form-control text-uppercase" name="name" id="name"  type="text" placeholder="EX : HANG TUAH" data-original-title="" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label pt-0" for="gender">For (Gender)</label>
+                                        <select id="gender" name="gender" class="form-control">
+                                            <?php foreach (getGender() as $gender => $g_name){?>
+                                                <option value="<?= $gender ?>" selected><?=$g_name ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="floor">Floor</label>

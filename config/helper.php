@@ -309,4 +309,23 @@ function getYear(){
     return range(2015, date('Y'));
 }
 
+function getGender($gender = null){
+
+    $genders = [
+        'M' => 'MALE',
+        'F' => 'FEMALE'
+    ];
+
+    if(is_null($gender)){
+        return  $genders;
+    }else{
+
+        if(isset($genders[$gender])){
+            return $genders[$gender];
+        }else{
+            return " ";
+        }
+    }
+}
+
 

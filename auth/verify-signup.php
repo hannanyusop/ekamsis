@@ -24,7 +24,9 @@ require_once '../env.php';
             echo "<script>alert('Email already exist!');window.location='register.php'</script>";
         }
 
-
+        if(!in_array($_POST['gender'], array_keys(getGender()))){
+            echo "<script>alert('Invalid gender!');window.location='register.php'</script>";
+        }
 
         $password = $_POST['password'];
         $token = sha1(mt_rand(1, 90000) . 'SALT');

@@ -54,6 +54,7 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
+                                            <th>For (Gender)</th>
                                             <th>Floor</th>
                                             <th></th>
                                         </tr>
@@ -63,6 +64,7 @@
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
+                                                <td><?= getGender($data['for_gender']); ?></td>
                                                 <td><?= implode(",", json_decode($data['floor_list'])) ?></td>
                                                 <td>
                                                     <a href="data-block-edit.php?id=<?=$data['id'] ?>" class="btn btn-success btn-xs">Edit</a>

@@ -62,7 +62,9 @@
                                                 <td><?= $data['phone_number']; ?></td>
                                                 <td><?= (is_null($data['verified_at']))? "<span class='badge badge-dark'>Not Verified</span>" : $data['verified_at']; ?></td>
                                                 <td>
-                                                    <a href="" class="btn btn-info btn-xs" type="button">View</a>
+<!--                                                    <a href="management-student-view.php?id=--><?//=$data['id'] ?><!--" class="btn btn-success btn-xs" type="button">View</a>-->
+                                                    <a href="management-student-edit.php?id=<?=$data['id'] ?>" class="btn btn-info btn-xs" type="button">Edit</a>
+
                                                 </td>
                                             </tr>
                                         <?php } ?>

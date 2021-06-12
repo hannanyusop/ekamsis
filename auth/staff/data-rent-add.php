@@ -19,11 +19,21 @@
         $room_ids[] = $data['room_sub_id'];
     }
 
-    $active_student  = $db->query("SELECT * FROM users WHERE  id NOT IN ( '" . implode( "', '" , $registered_user) . "' )");
+    if(isset($_GET['type'])){
 
-    $active_rooms = $db->query("SELECT rs.id as sub_id, floor,name,code FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE rs.id NOT IN ( '" . implode( "', '" , $room_ids ) . "' )");
+        if(!in_array($_GET['type'], array_keys(getGender()))){
+            echo "<script>alert('Invalid gender!');window.location='data-rent-add.php'</script>";
+        }
+        $active_student  = $db->query("SELECT * FROM users WHERE gender='$_GET[type]' AND id NOT IN ( '" . implode( "', '" , $registered_user) . "' )");
 
-    $r_rent = $db->query("SELECT * FROM rents r LEFT JOIN users u ON u.id = r.user_id WHERE session_id='$session[id]'");
+        $active_rooms = $db->query("SELECT rs.id as sub_id, floor,r.name,code FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id
+                                                    LEFT JOIN blocks as b ON b.id=r.block_id
+                                                    WHERE 
+                                                        b.for_gender = '$_GET[type]' AND
+                                                        rs.id NOT IN ( '" . implode( "', '" , $room_ids ) . "' )");
+
+        $r_rent = $db->query("SELECT * FROM rents r LEFT JOIN users u ON u.id = r.user_id WHERE session_id='$session[id]'");
+    }
 
     if(isset($_POST['user_id'])){
 
@@ -105,7 +115,7 @@
                                     <li class="breadcrumb-item"><a href="index.php"><i data-feather="home"></i></a></li>
                                     <li class="breadcrumb-item">Data Management</li>
                                     <li class="breadcrumb-item"><a href="data-rent.php">Rent</a> </li>
-                                    <li class="breadcrumb-item">Add</li>
+                                    <li class="breadcrumb-item">Assign Student</li>
 
                                 </ol>
                             </div>
@@ -116,11 +126,35 @@
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-8 offset-sm-2">
                         <div class="card">
                             <div class="card-header">
                                 <h5>Assign Student</h5>
                             </div>
+                            <?php if(!isset($_GET['type'])){ ?>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form class="theme-form" method="get">
+
+                                            <div class="form-group">
+                                                <label class="col-form-label pt-0" for="name">Select Gender</label>
+                                                <select id="gender" name="type" class="form-control">
+                                                    <?php foreach (getGender() as $gender => $g_name){?>
+                                                        <option value="<?= $gender ?>"><?=$g_name ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="card-footer">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            <?php }else{ ?>
                             <form class="form theme-form" method="post">
                                 <div class="card-body">
                                     <div class="row">
@@ -128,7 +162,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label" for="user_id">User</label>
                                                 <div class="col-sm-9">
-                                                    <select class="js-example-basic-single col-md-12" id="user_id" name="user_id" required>
+                                                    <select class="form-control select2 col-md-12" id="user_id" name="user_id" required>
                                                         <option value="" selected>-- Choose User -- </option>
                                                         <?php while($user = $active_student->fetch_assoc()){ ;?>
                                                             <option value="<?=$user['id'] ?>"><?=$user['fullname'] ?>(<?= $user['matric_number'] ?>)</option>
@@ -140,7 +174,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Room</label>
                                                 <div class="col-sm-9">
-                                                    <select class="js-example-basic-single col-md-12" id="room_sub_id" name="room_sub_id">
+                                                    <select class="form-control select2 col-md-12" id="room_sub_id" name="room_sub_id">
                                                         <option value="" selected>-- Choose Room -- </option>
                                                         <?php while($room = $active_rooms->fetch_assoc()){ ;?>
                                                             <option value="<?=$room['sub_id'] ?>"><?= $room['floor']." ".$room['name']." - ".$room['code'] ?></option>
@@ -156,10 +190,11 @@
                                 <div class="card-footer">
                                     <div class="col-sm-9 offset-sm-3">
                                         <button class="btn btn-primary" type="submit">Submit</button>
-                                        <a href="data-rent.php" class="btn btn-light">Cancel</a>
+                                        <a href="data-rent-add.php" class="btn btn-danger">Reset</a>
                                     </div>
                                 </div>
                             </form>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
