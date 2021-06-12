@@ -34,7 +34,7 @@ require_once '../env.php';
             echo "Error: Inserting user data." . $db->error; exit();
         }else{
 
-            $link = 'validate.php?token='.$token;
+            $link = $GLOBALS['APP_URL'].'auth/validate.php?token='.$token;
 
             $body = "Hello $fullname,<br><br>
             <p>This email has been registered to ".$GLOBALS['APP_NAME']."<br>Click this <a href='$link'>link</a> or copy<br>  <b>$link</b>

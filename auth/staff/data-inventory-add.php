@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="remark">Remark</label>
-                                        <textarea class="form-control" name="remark" id="remark" type="password" placeholder="Password" rows="5"></textarea>
+                                        <textarea class="form-control" name="remark" id="remark" rows="5"></textarea>
                                     </div>
                                     <div class="checkbox p-0">
                                         <input id="is_active" type="checkbox" name="is_active">

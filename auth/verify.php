@@ -24,6 +24,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
 
                     if($user['verified_at'] == null){
                         echo "<script>alert('You need to verify account first.!');window.location='login.php'</script>";
+                        exit();
                     }
 
                     $_SESSION['auth'] = [
