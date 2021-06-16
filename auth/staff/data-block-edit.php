@@ -27,7 +27,7 @@
 
             $name = strtoupper($_POST['name']);
             $is_active = (isset($_POST['is_active']))? 1 : 0;
-            $update = "UPDATE blocks set name='$name' WHERE id='$_GET[id]'";
+            $update = "UPDATE blocks set name='$name',for_gender='$_POST[gender]' WHERE id='$_GET[id]'";
             if (!$db->query($update)) {
                 echo "Error: " . $update . "<br>" . $db->error; exit();
             }else{
@@ -78,7 +78,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-form-label pt-0" for="name">For (Gender)</label>
+                                        <label class="col-form-label pt-0" for="gender">For (Gender)</label>
                                         <select id="gender" name="gender" class="form-control">
                                             <?php foreach (getGender() as $gender => $g_name){?>
                                                 <option value="<?= $gender ?>" <?= ($gender == $block['for_gender'])? "selected" : "" ?>><?=$g_name ?></option>
