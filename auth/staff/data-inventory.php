@@ -60,16 +60,24 @@
                                     <table class="display table-sm" id="datatable">
                                         <thead>
                                         <tr>
+                                            <th>No.</th>
                                             <th>Name</th>
+                                            <th class="text-center">Quantity</th>
                                             <th>Remark</th>
-                                            <th>Active</th>
+                                            <th>Status</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($data = $result->fetch_assoc()){ ;?>
+                                        <?php $no=0; while($data = $result->fetch_assoc()){ $no++;?>
+                                            <?php
+                                                $quantity_q = $db->query("SELECT * FROM room_sub_inventories WHERE inventory_id=$data[id]");
+
+                                            ?>
                                             <tr>
+                                                <th><?=$no ?></th>
                                                 <td><?= $data['name']; ?></td>
+                                                <td class="text-center"><?= $quantity_q->num_rows ?></td>
                                                 <td><?= strLimit($data['remark'], 20); ?></td>
                                                 <td><?= isActive($data['is_active']) ?></td>
                                                 <td>

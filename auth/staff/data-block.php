@@ -53,7 +53,7 @@
                                         <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Name</th>
+                                            <th>Block Name</th>
                                             <th>For (Gender)</th>
                                             <th>Floor</th>
                                             <th></th>

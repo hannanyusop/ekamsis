@@ -4,7 +4,22 @@
 
 <?php include_once('../permission_admin.php') ?>
 <?php
-    $result = $db->query("SELECT * FROM users");
+
+    if(isset($_GET['name'])){
+
+        $whereGender = '';
+        if($_GET['gender'] != ''){
+            $whereGender = "AND gender='$_GET[gender]'";
+        }
+//        AND matric_number LIKE '%$_GET[matric_number]%'
+        $name = $_GET['name'];
+
+        $result = $db->query("SELECT * FROM users WHERE fullname LIKE '%$name%' AND matric_number LIKE '%$_GET[matric_number]%' ".$whereGender);
+
+    }else{
+        $result = $db->query("SELECT * FROM users");
+
+    }
 ?>
 <?= include('layout/head.php'); ?>
 
@@ -38,15 +53,46 @@
 
             <div class="container-fluid">
                 <div class="row">
+
+                   <div class="col-md-12">
+                       <div class="card">
+                           <div class="card-body">
+                               <form class="needs-validation">
+                                   <div class="form-row">
+                                       <div class="col-md-4 mb-3">
+                                           <label for="name">Name</label>
+                                           <input class="form-control" id="name" name="name" type="text" placeholder="Student Name" value="<?= $_GET['name'] ?? '' ?>">
+                                       </div>
+                                       <div class="col-md-4 mb-3">
+                                           <label for="gender">Gender</label>
+                                           <select id="gender" name="gender" class="form-control">
+                                               <option value="" selected>-- ALL --</option>
+                                               <?php foreach (getGender() as $gender => $g_name){?>
+                                                   <option value="<?= $gender ?>" <?= (isset($_GET['gender']) && $_GET['gender'] == $gender)? "selected" : "" ?>><?=$g_name ?></option>
+                                               <?php } ?>
+                                           </select>
+                                       </div>
+                                       <div class="col-md-4 mb-3">
+                                           <label for="matric_number">Matric Number</label>
+                                           <input class="form-control" id="matric_number" name="matric_number" type="text" placeholder="Matric Number" value="<?= $_GET['matric_number'] ?? '' ?>">
+                                       </div>
+                                   </div>
+                                   <button class="btn btn-primary" type="submit">Search</button>
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive product-table">
-                                    <table class="display table-sm" id="datatable">
+                                    <table class="table table-striped">
                                         <thead>
                                         <tr>
                                             <th>Id</th>
                                             <th>Name</th>
+                                            <th>Gender</th>
                                             <th>Matric Number</th>
                                             <th>Phone Number</th>
                                             <th>Verified</th>
@@ -58,6 +104,7 @@
                                             <tr>
                                                 <td><?= $data['id']; ?></td>
                                                 <td><?= strLimit($data['fullname'], 20); ?></td>
+                                                <td><?= getGender($data['gender']) ?></td>
                                                 <td><?= $data['matric_number']; ?></td>
                                                 <td><?= $data['phone_number']; ?></td>
                                                 <td><?= (is_null($data['verified_at']))? "<span class='badge badge-dark'>Not Verified</span>" : $data['verified_at']; ?></td>

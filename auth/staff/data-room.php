@@ -133,7 +133,7 @@
                                         <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Name</th>
+                                            <th>Room Name</th>
                                             <th>Floor</th>
                                             <th>Total Sub Room</th>
                                             <th></th>
