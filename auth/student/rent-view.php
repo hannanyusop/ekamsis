@@ -16,10 +16,10 @@
             exit();
         }
 
-        if($current_session['id'] != $rent['session_id']){
-            echo "<script>alert('Invalid session.');window.location='rent-index.php'</script>";
-            exit();
-        }
+//        if($current_session['id'] != $rent['session_id']){
+//            echo "<script>alert('Invalid session.');window.location='rent-index.php'</script>";
+//            exit();
+//        }
 
 //        if(is_null($rent['check_in_on'])){
 //            echo "<script>alert('You need to check-in first.');window.location='rent-index.php'</script>";
