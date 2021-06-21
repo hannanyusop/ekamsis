@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include_once('../permission_admin.php') ?>
+<?php include_once('../permission_staff.php') ?>
 <?php include('layout/head.php'); ?>
 
 <body main-theme-layout="main-theme-layout-1">
