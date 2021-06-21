@@ -40,6 +40,22 @@ $agent = 10;
 $active_agent = 10;
 $house = $project =$booking_approve = $booking = 10;
 
+$room_q = $db->query("SELECT * FROM room_subs");
+$room = $room_q->num_rows;
+
+$available_room_q = $db->query("SELECT * FROM room_subs WHERE current_student_id IS NULL");
+$available_room   = $available_room_q->num_rows;
+
+$block_q = $db->query("SELECT * FROM blocks");
+$block = $block_q->num_rows;
+
+$block_m_q = $db->query("SELECT * FROM blocks WHERE for_gender='M'");
+$block_m = $block_m_q->num_rows;
+
+$block_f_q = $db->query("SELECT * FROM blocks WHERE for_gender='F'");
+$block_f = $block_f_q->num_rows;
+
+
 
 ?>
 
@@ -70,91 +86,53 @@ $house = $project =$booking_approve = $booking = 10;
 
             <div class="container-fluid">
                 <div class="row">
-                    <div class="row">
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <h5 class="mb-0">Student</h5>
-                                    </div>
-                                    <div class="project-widgets text-center">
-                                        <h1 class="font-primary counter"><?= $student?></h1>
-                                        <h6 class="mb-0">Students</h6>
-                                    </div>
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <h5 class="mb-0">Student</h5>
                                 </div>
-                                <div class="card-footer project-footer">
-                                    <h6 class="mb-0">Inactive: <span class="counter"><?= $student_inactive ?></span></h6>
+                                <div class="project-widgets text-center">
+                                    <h1 class="font-primary counter"><?= $student?></h1>
+                                    <h6 class="mb-0">Students</h6>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <h5 class="mb-0">Total Agent</h5>
-                                    </div>
-                                    <div class="project-widgets text-center">
-                                        <h1 class="font-primary counter"><?= $agent ?></h1>
-                                        <h6 class="mb-0">Agents</h6>
-                                    </div>
-                                </div>
-                                <div class="card-footer project-footer">
-                                    <h6 class="mb-0">Active: <span class="counter"><?= $active_agent ?></span></h6>
-                                </div>
+                            <div class="card-footer project-footer">
+                                <h6 class="mb-0">Inactive: <span class="counter"><?= $student_inactive ?></span></h6>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <h5 class="mb-0">Booking Created</h5>
-                                    </div>
-                                    <div class="project-widgets text-center">
-                                        <h1 class="font-primary counter"><?= $booking ?></h1>
-                                        <h6 class="mb-0">Bookings</h6>
-                                    </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <h5 class="mb-0">Total Room</h5>
                                 </div>
-                                <div class="card-footer project-footer">
-                                    <h6 class="mb-0">Confirmed Booking: <span class="counter"><?= $booking_approve ?></span></h6>
+                                <div class="project-widgets text-center">
+                                    <h1 class="font-primary counter"><?= $room ?></h1>
+                                    <h6 class="mb-0">Rooms</h6>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <h5 class="mb-0">Total Property </h5>
-                                    </div>
-                                    <div class="project-widgets text-center">
-                                        <h1 class="font-primary counter"><?= $house ?></h1>
-                                        <h6 class="mb-0">Properties</h6>
-                                    </div>
-                                </div>
-                                <div class="card-footer project-footer">
-                                    <h6 class="mb-0">Total Project: <span class="counter"><?= $project ?> </span></h6>
-                                </div>
+                            <div class="card-footer project-footer">
+                                <h6 class="mb-0">Available: <span class="counter"><?= $available_room ?></span></h6>
                             </div>
                         </div>
-
-                        <div class="col-6 col-md-6 col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p class="text-center">Booking Created Statistics For <?= date('Y') ?></p>
-                                    <canvas id="myChart2"></canvas>
+                    </div>
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <h5 class="mb-0">Block</h5>
+                                </div>
+                                <div class="project-widgets text-center">
+                                    <h1 class="font-primary counter"><?= $block ?></h1>
+                                    <h6 class="mb-0">Blocks</h6>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-6 col-md-6 col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p class="text-center">Approved Booking Statistics For <?= date('Y') ?></p>
-                                    <canvas id="success"></canvas>
-                                </div>
+                            <div class="card-footer project-footer">
+                                <h6 class="mb-0">Male: <span class="counter"><?= $block_m ?></span> | Female: <span class="counter"><?= $block_f ?></span></h6>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -171,91 +149,4 @@ $house = $project =$booking_approve = $booking = 10;
 </body>
 
 <?php include('layout/script.php'); ?>
-<script type="text/javascript">
-    var ctx = document.getElementById("myChart2").getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Statistics',
-                data: <?= json_encode($data) ?>,
-                borderWidth: 2,
-                backgroundColor: '#6777ef',
-                borderColor: '#6777ef',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                yAxes: [{
-                    gridLines: {
-                        drawBorder: false,
-                        color: '#f2f2f2',
-                    },
-                    ticks: {
-                        beginAtZero: true,
-                        stepSize: 1
-                    }
-                }],
-                xAxes: [{
-                    ticks: {
-                        display: false
-                    },
-                    gridLines: {
-                        display: false
-                    }
-                }]
-            },
-        }
-    });
-
-    var success = document.getElementById("success").getContext('2d');
-    new Chart(success, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Statistics',
-                data: <?= json_encode($success) ?>,
-                borderWidth: 2,
-                backgroundColor: '#6777ef',
-                borderColor: '#6777ef',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                yAxes: [{
-                    gridLines: {
-                        drawBorder: false,
-                        color: '#f2f2f2',
-                    },
-                    ticks: {
-                        beginAtZero: true,
-                        stepSize: 1
-                    }
-                }],
-                xAxes: [{
-                    ticks: {
-                        display: false
-                    },
-                    gridLines: {
-                        display: false
-                    }
-                }]
-            },
-        }
-    });
-</script>
 </html>
