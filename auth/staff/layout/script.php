@@ -10,12 +10,15 @@
 <!-- Theme Config -->
 <script src="../../assets/js/config.js"></script>
 
-<script src="../../assets/js/select2/select2.full.min.js"></script>
-<script src="../../assets/js/select2/select2-custom.js"></script>
-
+<script src="../../assets/js/chart/chartjs/chart.min.js"></script>
+<script src="../../assets/js/datepicker/date-picker/datepicker.js"></script>
+<script src="../../assets/js/datepicker/date-picker/datepicker.en.js"></script>
+<script src="../../assets/js/datepicker/date-picker/datepicker.custom.js"></script>
 <script src="../../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
 
+
 <script src="../../assets/js/script.js"></script>
+
 
 <script type="text/javascript">
     $(document).ready(function() {

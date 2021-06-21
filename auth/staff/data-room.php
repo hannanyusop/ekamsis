@@ -93,7 +93,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-sm-3 col-form-label" for="total">Total Sub Room</label>
+                                            <label class="col-sm-3 col-form-label" for="total">Total Of Student</label>
                                             <div class="col-sm-9">
                                                 <input type="number" class="form-control" min="1" max="8" name="total" value="1" required>
                                             </div>

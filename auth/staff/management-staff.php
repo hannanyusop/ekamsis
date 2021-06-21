@@ -83,7 +83,7 @@
                                                 <td><?= $data['role']; ?></td>
                                                 <td>
                                                     <?php if($data['id'] != 1){ ?>
-                                                    <a href="" class="btn btn-info btn-xs" type="button">Edit</a>
+                                                    <a href="management-staff-edit.php?id=<?= $data['id']?>" class="btn btn-info btn-xs" type="button">Edit</a>
                                                     <a href="management-staff.php?delete=<?= $data['id']?>" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure want to delete this staff?')">Delete</a>
                                                     <?php } ?>
                                                 </td>

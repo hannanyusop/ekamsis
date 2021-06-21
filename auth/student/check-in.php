@@ -16,6 +16,20 @@
             exit();
         }
 
+        $rent_remark_q = $db->query("SELECT * FROM rent_remark WHERE rent_id=$rent_id");
+
+        $user_q = $db->query("SELECT * FROM users WHERE id=$rent[user_id] ");
+        $user = $user_q->fetch_assoc();
+
+        $session_q = $db->query("SELECT * FROM sessions WHERE id=$rent[session_id]");
+        $session = $session_q->fetch_assoc();
+
+        $rs_q = $db->query("SELECT rs.id as sub_id, floor,name,code,block_id FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE rs.id= $rent[room_sub_id]");
+        $rs = $rs_q->fetch_assoc();
+
+        $block_q = $db->query("SELECT * FROM blocks WHERE id=$rs[block_id]");
+        $block = $block_q->fetch_assoc();
+
         if($current_session['id'] != $rent['session_id']){
             echo "<script>alert('Invalid session.');window.location='rent-index.php'</script>";
             exit();
@@ -116,6 +130,33 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
+                                <div class="text-center mb-5">
+                                    <b>BORANG SEMAKAN INVENTORI KOLEJ KEDIAMAN UTeM KAMPUS INDUK</b><br>
+                                    Jalan Hang Tuah Jaya, 76100 Durian Tunggal, Melaka<br>
+                                    Tel:+606 270 1000  |    Fax:+606 270 1022   | Email: kamsis@utem.edu.my
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <span>NAME : <b><?= $user['fullname'] ?></b></span><br>
+                                        <span>MATRIC NUMBER : <b><?= $user['matric_number']; ?></b></span><br>
+                                        <span>PHONE NO. : <b><?= $user['phone_number']; ?></b></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span>BlOCK :<?= $block['name'] ?></span><br>
+                                        <span>FLOOR :<?= $rs['floor'] ?></span><br>
+                                        <span>ROOM : <?= $rs['floor']." ".$rs['name']." - ".$rs['code'] ?></span>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <span>SESSION : <b><?= $session['name'] ?></b></span><br>
+                                        <span>CHECK-IN ON: <b><?= $rent['check_in_on'] ?></b></span><br>
+                                        <span>CHECK-OUT ON: <b><?= $rent['check_out_on'] ?></b></span>
+                                    </div>
+                                </div>
+
+                                <hr>
 
                                 <form method="post" enctype="multipart/form-data">
 

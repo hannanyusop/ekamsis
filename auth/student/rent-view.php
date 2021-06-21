@@ -21,10 +21,10 @@
             exit();
         }
 
-        if(is_null($rent['check_in_on'])){
-            echo "<script>alert('You need to check-in first.');window.location='rent-index.php'</script>";
-            exit();
-        }
+//        if(is_null($rent['check_in_on'])){
+//            echo "<script>alert('You need to check-in first.');window.location='rent-index.php'</script>";
+//            exit();
+//        }
 
         $rent_remark_q = $db->query("SELECT * FROM rent_remark WHERE rent_id=$rent_id");
 

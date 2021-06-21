@@ -13,7 +13,7 @@ if(isset($_GET['id'])){
     $student = $q_student->fetch_assoc();
 
     if(!$student){
-        echo "<script>alert('Invalid student id.');window.location='management-student-edit.php?id=$student_id';</script>";
+        echo "<script>alert('Invalid student id.');window.location='management-student.php';</script>";
         exit();
     }
 
@@ -29,7 +29,7 @@ if(isset($_GET['id'])){
 
 
         if($exist){
-            echo "<script>alert('Email already exist!');window.location='register.php'</script>";
+            echo "<script>alert('Email already exist!');window.location='management-student-edit.php?id=$student_id'</script>";
         }
 
         if(!is_numeric($phone_number)){
