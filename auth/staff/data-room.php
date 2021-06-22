@@ -7,6 +7,7 @@
 
     if($_GET['id']){
 
+        $block_id = $_GET['id'];
         $q_block = $db->query("SELECT * FROM blocks WHERE id=$_GET[id]");
 
         $block = $q_block->fetch_assoc();
@@ -14,6 +15,28 @@
         if(!$block){
             echo "<script>alert('Block not exist!');window.location='data-block.php';</script>";
             exit();
+        }
+
+        if(isset($_GET['delete'])){
+
+            $delete = $_GET['delete'];
+
+            $room_q = $db->query("SELECT * FROM rooms WHERE id=$delete");
+            $room = $room_q->fetch_assoc();
+
+            if(!$room){
+                echo "<script>alert('Failed to delete. Invalid room!');window.location='data-room.php?id=$block_id';</script>";
+                exit();
+            }
+
+            $room_id = $room['id'];
+            $db->query("DELETE FROM rents WHERE room_sub_id IN (SELECT id FROM room_subs WHERE room_id=$room_id)");
+            $db->query("DELETE FROM room_sub_inventories WHERE room_sub_id IN (SELECT id FROM room_subs WHERE room_id=$room_id)");
+            $db->query("DELETE FROM rooms WHERE id=$room_id");
+
+            echo "<script>alert('Room deleted!');window.location='data-room.php?id=$block_id';</script>";
+
+
         }
 
         $floors = json_decode($block['floor_list']);
@@ -154,6 +177,9 @@
                                                 <td><?= $rs->num_rows; ?></td>
                                                 <td>
                                                     <a href="data-room-edit.php?id=<?=$data['id'] ?>" class="btn btn-info btn-xs">Edit</a>
+                                                    <a onclick="return confirm('Are you sure want to delete this room? All related data also will be deleted.')" href="data-room.php?id=<?= $block_id; ?>&delete=<?=$data['id'] ?>" class="btn btn-danger btn-xs">Delete</a>
+
+
                                                 </td>
                                             </tr>
                                         <?php } ?>
