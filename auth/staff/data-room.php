@@ -126,9 +126,11 @@
                                             <label class="col-sm-3 col-form-label" for="floor">Inventory</label>
                                             <div class="col-sm-9">
                                                 <div class="col">
+                                                    <label class="d-block" for="all">
+                                                        <input class="checkbox_animated all" id="all" type="checkbox" value="" name="all">All</label>
                                                     <?php while($inventory = $q_inventories->fetch_assoc()){ ;?>
                                                         <label class="d-block" for="inventory_id_<?= $inventory['id']?>">
-                                                            <input class="checkbox_animated" id="inventory_id_<?= $inventory['id']?>" type="checkbox" value="<?= $inventory['id']?>" name="inventory_id[]"><?= $inventory['name'];?>                                                        </label>
+                                                            <input class="checkbox_animated individual" id="inventory_id_<?= $inventory['id']?>" type="checkbox" value="<?= $inventory['id']?>" name="inventory_id[]"><?= $inventory['name'];?>                                                        </label>
                                                     <?php } ?>
                                                 </div>
                                             </div>
@@ -204,4 +206,9 @@
 </body>
 
 <?php include('layout/script.php'); ?>
+<script>
+    $(".all").click(function(){
+        $(".individual").prop("checked",$(this).prop("checked"));
+    });
+</script>
 </html>
