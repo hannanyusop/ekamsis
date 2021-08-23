@@ -157,7 +157,7 @@
                                     <table class="display table-sm" id="datatable">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
+                                            <th>No</th>
                                             <th>Room Name</th>
                                             <th>Floor</th>
                                             <th>Total Sub Room</th>
@@ -165,7 +165,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($data = $r_rooms->fetch_assoc()){
+                                        <?php $no=1; while($data = $r_rooms->fetch_assoc()){
 
 //                                            $result = $db->query("SELECT rs.id as rsid, floor,name,codeFROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE block_id=$_GET[id]");
 
@@ -173,7 +173,7 @@
                                         ?>
 
                                             <tr>
-                                                <td><?= $data['id']; ?></td>
+                                                <td><?= $no; ?></td>
                                                 <td><?= $data['name'] ?></td>
                                                 <td><?= $data['floor']; ?></td>
                                                 <td><?= $rs->num_rows; ?></td>
@@ -184,7 +184,7 @@
 
                                                 </td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php $no++; } ?>
                                         </tbody>
                                     </table>
                                 </div>

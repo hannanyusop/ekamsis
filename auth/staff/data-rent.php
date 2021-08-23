@@ -144,7 +144,7 @@
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
+                                            <th>No</th>
                                             <th>Name</th>
                                             <th>Gender</th>
                                             <th>Room</th>
@@ -154,14 +154,14 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($data = $r_rent->fetch_assoc()){ ;?>
+                                        <?php $no=1; while($data = $r_rent->fetch_assoc()){ ;?>
 
                                                 <?php
                                                         $rs_q = $db->query("SELECT rs.id as sub_id, floor,name,code FROM room_subs rs LEFT JOIN rooms r ON rs.room_id=r.id WHERE rs.id= $data[room_sub_id]");
                                                         $rs = $rs_q->fetch_assoc();
                                                 ?>
                                             <tr>
-                                                <td><?= $data['id']; ?></td>
+                                                <td><?= $no;  ?></td>
                                                 <td>
                                                     <?= strLimit($data['fullname'], 20); ?><br>
                                                     <small>Matric No: <?= $data['matric_number'] ?></small>
@@ -176,7 +176,7 @@
                                                     <a class="btn btn-danger btn-sm" href="data-rent.php?delete=<?= $data['id']; ?>" onclick="return confirm('Are you sure want to delete this data?')">Delete</a>
                                                 </td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php $no++; } ?>
                                         </tbody>
                                     </table>
                                 </div>

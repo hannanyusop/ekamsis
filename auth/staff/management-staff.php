@@ -67,7 +67,7 @@
                                     <table class="display table-sm" id="datatable">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
+                                            <th>No</th>
                                             <th>Email</th>
                                             <th>Name</th>
                                             <th>Role</th>
@@ -75,9 +75,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($data = $result->fetch_assoc()){ ;?>
+                                        <?php $no=0; while($data = $result->fetch_assoc()){ $no++;?>
                                             <tr>
-                                                <td><?= $data['id']; ?></td>
+                                                <td><?= $no ?></td>
                                                 <td><?= strLimit($data['email'], 100); ?></td>
                                                 <td><?= $data['fullname']; ?></td>
                                                 <td><?= $data['role']; ?></td>

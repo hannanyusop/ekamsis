@@ -76,10 +76,25 @@ $r_rent = $db->query("SELECT * FROM rents WHERE user_id=$user_id");
                                                     <a class="btn btn-primary btn-sm" href="rent-view.php?id=<?= $data['id'] ?>">View</a>
 
                                                     <?php if($current_session['id'] == $session['id']){ ?>
-                                                        <?php if(is_null($data['check_in_on'])) { ?>
-                                                        <a class="btn btn-success btn-sm" href="check-in.php?id=<?= $data['id']; ?>">Check-in</a>
+                                                        <?php if(is_null($data['check_in_on']) ) { ?>
+                                                            <?php
+                                                            if($session['allow_checkin'] == 1){
+                                                                echo '<a class="btn btn-success btn-sm" href="check-in.php?id='.$data['id'].'">Check-in</a>';
+                                                            }else{
+                                                                echo '<a class="btn btn-success btn-sm disabled" href="#">Check-in</a>';
+                                                            }
+                                                            ?>
+
                                                         <?php }elseif(!is_null($data['check_in_on']) && is_null($data['check_out_on'])){ ?>
                                                             <a class="btn btn-success btn-sm" href="check-out.php?id=<?= $data['id']; ?>">Check-out</a>
+
+                                                            <?php
+                                                            if($session['allow_checkout'] == 1){
+                                                                echo '<a class="btn btn-success btn-sm" href="check-out.php?id='.$data['id'].'">Check-out</a>';
+                                                            }else{
+                                                                echo '<a class="btn btn-success btn-sm disabled" href="#">Check-in</a>';
+                                                            }
+                                                            ?>
                                                         <?php } ?>
                                                     <?php } ?>
                                                 </td>

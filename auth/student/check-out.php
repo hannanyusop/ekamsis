@@ -16,7 +16,15 @@
             exit();
         }
 
-        if($current_session['id'] != $rent['session_id']){
+        $session_q = $db->query("SELECT * FROM sessions WHERE id=$rent[session_id]");
+        $session = $session_q->fetch_assoc();
+
+        if($session['allow_checkout'] == 0){
+            echo "<script>alert('Check-out are not allowed for temporary.');window.location='rent-index.php'</script>";
+            exit();
+        }
+
+        if($session['id'] != $rent['session_id']){
             echo "<script>alert('Invalid session.');window.location='rent-index.php'</script>";
             exit();
         }
@@ -197,7 +205,7 @@
                                                 <td>
                                                     <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                                         <div class="radio radio-primary">
-                                                            <input id="<?= $i['name']; ?>" type="radio" name="is_ok[<?= $remark['id'] ?>]" value="1" checked>
+                                                            <input id="<?= $i['name']; ?>" type="radio" name="is_ok[<?= $remark['id'] ?>]" value="1">
                                                             <label class="mb-0" for="<?= $i['name']; ?>">Good</label>
                                                         </div>
                                                         <div class="radio radio-primary">

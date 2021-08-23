@@ -13,7 +13,7 @@
         $exist = $check_q->fetch_assoc();
 
         if(!$exist){
-            echo "<script>alert('Session for not exist!');window.location='data-session.php';</script>";
+            echo "<script>alert('Session not exist!');window.location='data-session.php';</script>";
         }else{
             $db->query("UPDATE sessions SET is_current=0 WHERE is_current=1");
 
@@ -21,9 +21,52 @@
                 echo "<script>alert('Session status updated!');window.location='data-session.php';</script>";
             }
         }
-
-
     }
+
+if(isset($_GET['checkin'])){
+
+    $check_q = $db->query("SELECT * FROM sessions WHERE id='$_GET[checkin]'");
+    $exist = $check_q->fetch_assoc();
+
+    if(!$exist){
+        echo "<script>alert('Session not exist!');window.location='data-session.php';</script>";
+    }else{
+
+        if($db->query("UPDATE sessions SET allow_checkin=1,allow_checkout=0 WHERE id='$_GET[checkin]'")){
+            echo "<script>alert('Checkin enabled!');window.location='data-session.php';</script>";
+        }
+    }
+}
+
+if(isset($_GET['checkout'])){
+
+    $check_q = $db->query("SELECT * FROM sessions WHERE id='$_GET[checkout]'");
+    $exist = $check_q->fetch_assoc();
+
+    if(!$exist){
+        echo "<script>alert('Session not exist!');window.location='data-session.php';</script>";
+    }else{
+
+        if($db->query("UPDATE sessions SET allow_checkin=0,allow_checkout=1 WHERE id='$_GET[checkout]'")){
+            echo "<script>alert('Checkout enabled!');window.location='data-session.php';</script>";
+        }
+    }
+}
+
+if(isset($_GET['disabled'])){
+
+    $check_q = $db->query("SELECT * FROM sessions WHERE id='$_GET[disabled]'");
+    $exist = $check_q->fetch_assoc();
+
+    if(!$exist){
+        echo "<script>alert('Session not exist!');window.location='data-session.php';</script>";
+    }else{
+
+        if($db->query("UPDATE sessions SET allow_checkin=0,allow_checkout=0 WHERE id='$_GET[disabled]'")){
+            echo "<script>alert('Checkin/checkout disabled!');window.location='data-session.php';</script>";
+        }
+    }
+}
 ?>
 <?php include('layout/head.php'); ?>
 
@@ -71,22 +114,40 @@
                                     <table class="display table-sm" id="datatable">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
+                                            <th>No</th>
                                             <th>Name</th>
                                             <th>Active Session</th>
+                                            <th>Allow Checkin</th>
+                                            <th>Allow Checkout</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($data = $result->fetch_assoc()){ ;?>
+                                        <?php $no=0; while($data = $result->fetch_assoc()){ $no++; ;?>
                                             <tr>
-                                                <td><?= $data['id']; ?></td>
+                                                <td><?= $no ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
                                                 <td><?= ($data['is_current'] == 1)? "Yes" : "No" ?></td>
+                                                <td><?= ($data['allow_checkin'] == 1)? "Yes" : "No" ?></td>
+                                                <td><?= ($data['allow_checkout'] == 1)? "Yes" : "No" ?></td>
                                                 <td>
                                                     <?php if($data['is_current'] == 0){ ?>
                                                         <a href="data-session.php?active=<?=$data['id']?>" class="btn btn-success btn-xs" type="button" onclick="return confirm('Are you sure want to update this session status as current session?')">Set As Current</a>
-                                                    <?php } ?>
+                                                    <?php }else{
+
+                                                        if($data['allow_checkin'] == 0 || $data['allow_checkout'] == 1){
+                                                            echo '<a href="data-session.php?checkin='.$data['id'].'" class="btn btn-info btn-xs" onclick="return confirm(\'Are you sure want to enabled check-in?\')">Enabled Check-in</a>';
+                                                        }else{
+                                                            echo '<a href="data-session.php?checkout='.$data['id'].'" class="btn btn-info btn-xs" onclick="return confirm(\'Are you sure want to enabled check-out?\')">Enabled Check-out</a>';
+
+                                                        }
+
+                                                        if($data['allow_checkin'] == 1 || $data['allow_checkout'] == 1){
+                                                            echo '<a href="data-session.php?disabled='.$data['id'].'" class="btn btn-dark btn-xs" onclick="return confirm(\'Are you sure want to disabled check-in/check-out?\')">Disabled</a>';
+                                                        }
+
+
+                                                    } ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>

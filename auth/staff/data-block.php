@@ -52,7 +52,7 @@
                                     <table class="display table-sm" id="datatable">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
+                                            <th>No</th>
                                             <th>Block Name</th>
                                             <th>For (Gender)</th>
                                             <th>Floor</th>
@@ -60,9 +60,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <?php while($data = $result->fetch_assoc()){ ;?>
+                                        <?php $no=1; while($data = $result->fetch_assoc()){ ;?>
                                             <tr>
-                                                <td><?= $data['id']; ?></td>
+                                                <td><?= $no ?></td>
                                                 <td><?= strLimit($data['name'], 20); ?></td>
                                                 <td><?= getGender($data['for_gender']); ?></td>
                                                 <td><?= implode(",", json_decode($data['floor_list'])) ?></td>
@@ -71,7 +71,7 @@
                                                     <a href="data-room.php?id=<?=$data['id'] ?>" class="btn btn-info btn-xs">Manage Room</a>
                                                 </td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php $no++; } ?>
                                         </tbody>
                                     </table>
                                 </div>
