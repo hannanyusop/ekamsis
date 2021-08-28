@@ -27,9 +27,10 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-form-label" for="gender">Gender</label>
-                                        <select id="gender" name="gender" class="form-control">
+                                        <select id="gender" name="gender" class="form-control" required>
+                                            <option value="" selected>-- Select Gender --</option>
                                             <?php foreach (getGender() as $gender => $g_name){?>
-                                            <option value="<?= $gender ?>" selected><?=$g_name ?></option>
+                                            <option value="<?= $gender ?>"><?=$g_name ?></option>
                                             <?php } ?>
                                         </select>
                                         <p id="name-help"></p>
